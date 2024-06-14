@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 553c8ada891f4726a566e5bacf8c4c64
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - player1: {instanceID: 0}
+  - player2: {instanceID: 0}
+  - mainCamera: {instanceID: 0}
+  - p1Camera: {instanceID: 0}
+  - p2Camera: {instanceID: 0}
+  - cameraConfig: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
