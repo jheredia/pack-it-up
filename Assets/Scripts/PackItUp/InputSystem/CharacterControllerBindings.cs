@@ -96,6 +96,78 @@ namespace PackItUp.InputSystem
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""P2Controls"",
+            ""id"": ""659e571e-15e2-4577-970b-cd9b92baa349"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""768b0b2c-1202-499c-8923-4a79a61978e5"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""0c819058-de2e-4a2b-b76f-b7aaf21e9c5b"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""71ee762a-ded2-4ae0-8cde-f4bd48a9b4aa"",
+                    ""path"": ""<Keyboard>/numpad8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""f9730997-7f73-43f7-870f-8610b8426d05"",
+                    ""path"": ""<Keyboard>/numpad2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""e8dcabb9-7adc-4033-a3e7-1ef24215444a"",
+                    ""path"": ""<Keyboard>/numpad4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""873b4d01-7cfd-4fc9-a339-796f29c0b71a"",
+                    ""path"": ""<Keyboard>/numpad6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -115,6 +187,9 @@ namespace PackItUp.InputSystem
             // P1Controls
             m_P1Controls = asset.FindActionMap("P1Controls", throwIfNotFound: true);
             m_P1Controls_Move = m_P1Controls.FindAction("Move", throwIfNotFound: true);
+            // P2Controls
+            m_P2Controls = asset.FindActionMap("P2Controls", throwIfNotFound: true);
+            m_P2Controls_Move = m_P2Controls.FindAction("Move", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -218,6 +293,52 @@ namespace PackItUp.InputSystem
             }
         }
         public P1ControlsActions @P1Controls => new P1ControlsActions(this);
+
+        // P2Controls
+        private readonly InputActionMap m_P2Controls;
+        private List<IP2ControlsActions> m_P2ControlsActionsCallbackInterfaces = new List<IP2ControlsActions>();
+        private readonly InputAction m_P2Controls_Move;
+        public struct P2ControlsActions
+        {
+            private @CharacterControllerBindings m_Wrapper;
+            public P2ControlsActions(@CharacterControllerBindings wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_P2Controls_Move;
+            public InputActionMap Get() { return m_Wrapper.m_P2Controls; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(P2ControlsActions set) { return set.Get(); }
+            public void AddCallbacks(IP2ControlsActions instance)
+            {
+                if (instance == null || m_Wrapper.m_P2ControlsActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_P2ControlsActionsCallbackInterfaces.Add(instance);
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+            }
+
+            private void UnregisterCallbacks(IP2ControlsActions instance)
+            {
+                @Move.started -= instance.OnMove;
+                @Move.performed -= instance.OnMove;
+                @Move.canceled -= instance.OnMove;
+            }
+
+            public void RemoveCallbacks(IP2ControlsActions instance)
+            {
+                if (m_Wrapper.m_P2ControlsActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IP2ControlsActions instance)
+            {
+                foreach (var item in m_Wrapper.m_P2ControlsActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_P2ControlsActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public P2ControlsActions @P2Controls => new P2ControlsActions(this);
         private int m_KeyboardSchemeIndex = -1;
         public InputControlScheme KeyboardScheme
         {
@@ -228,6 +349,10 @@ namespace PackItUp.InputSystem
             }
         }
         public interface IP1ControlsActions
+        {
+            void OnMove(InputAction.CallbackContext context);
+        }
+        public interface IP2ControlsActions
         {
             void OnMove(InputAction.CallbackContext context);
         }
