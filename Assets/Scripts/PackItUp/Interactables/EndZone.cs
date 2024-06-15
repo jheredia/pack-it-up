@@ -3,51 +3,56 @@ using UnityEngine;
 namespace PackItUp.Interactables
 {
     [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(SpriteRenderer))]
     public class EndZone : MonoBehaviour
     {
-        public delegate void EndZoneContact();
-        public static event EndZoneContact OnEndZoneContact;
+        public delegate void EventHandler();
+        public event EventHandler OnPlayerEnteredZone;
+        private bool active;  // Indicates when player can exit through the end zone
+        [SerializeField] private Vector2 size = new Vector2(5, 2);
+        private SpriteRenderer _spr;
         private BoxCollider2D _bc;
 
         private void Awake()
         {
+            // Set to not active until mandatory items are collected
+            active = false;
+
+            _spr = GetComponent<SpriteRenderer>();
             _bc = GetComponent<BoxCollider2D>();
+
+            // Adjust box collider and sprite renderer sizes
+            _spr.size = size;
+            _bc.size = size;
         }
 
         private void OnEnable()
         {
-            _bc.enabled = true;
+            active = false;
 
-            // TODO: Activate the End Zone with an Inventory System Event
-            // and Timer Event
-            // Inventory.MandatoryItemsCollected += ActivateZone
-            // Timer.TimeOut += DeactivateZone
+            // TODO: Activate the End Zone with the Game State Manager
+            // GameStateManager.OnLevelWinCondition += ActivateZone
+
+            // OR call public method ActivateZone from GSM (see below)
         }
 
-        void Start()
+        /*private void OnDisable()
         {
-            // Level has started, no mandatory objects collected
-            // _bc.enabled = false;  // bc acts as on/off toggle
-        }
+            // TODO: Unsubscribe to Game State Manager Event
+            // GameStateManager.MandatoryItemsCollected -= ActivateZone
 
-        private void OnDisable()
-        {
-            _bc.enabled = false;
+            // OR call public method ActivateZone from GSM (see below)
+        }*/
 
-            // TODO: Unsubscribe to Events
-            // Inventory.MandatoryItemsCollected -= ActivateZone
-            // Timer.TimeOut -= DeactivateZone
-        }
-
-        void ActivateZone()
+        public void ActivateZone()
         {
             // Turn end zone on after all mandatory items are collected
-            _bc.enabled = true;
+            active = true;
         }
 
         void DeactivateZone()
         {
-            _bc.enabled = false;
+            active = false;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -58,25 +63,10 @@ namespace PackItUp.Interactables
                 Debug.Log("End Zone Triggered");
 
                 // Checking for subscribers
-                if (OnEndZoneContact != null) {
-                    OnEndZoneContact();
+                if (OnPlayerEnteredZone != null) {
+                    OnPlayerEnteredZone();
                 }
             }
         }
     }
 }
-
-/*public partial class GameManager : MonoBehaviour
-{
-    private void OnEnable()
-    {
-        // TODO: Subscribe GameManager to EndZone's Event
-        // EndZone.OnEndZoneContact += LevelSuccess;
-    }
-
-    private void OnDisable()
-    {
-        // TODO: Subscribe GameManager to EndZone's Event
-        // EndZone.OnEndZoneContact -= LevelSuccess;
-    }
-}*/
