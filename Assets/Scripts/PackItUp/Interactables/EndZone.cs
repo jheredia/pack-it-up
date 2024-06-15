@@ -1,35 +1,35 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace PackItUp.Interactables
 {
     [RequireComponent(typeof(Collider2D))]
     [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Light))]
     public class EndZone : MonoBehaviour
     {
         public delegate void EventHandler();
         public event EventHandler OnPlayerEnteredZone;
-        private bool active;  // Indicates when player can exit through the end zone
         [SerializeField] private Vector2 size = new Vector2(5, 2);
         private SpriteRenderer _spr;
         private BoxCollider2D _bc;
+        private Light2D _light;
 
         private void Awake()
         {
-            // Set to not active until mandatory items are collected
-            active = false;
-
             _spr = GetComponent<SpriteRenderer>();
             _bc = GetComponent<BoxCollider2D>();
+            _light = GetComponent<Light2D>();
 
             // Adjust box collider and sprite renderer sizes
             _spr.size = size;
             _bc.size = size;
+            // Adjust light radius to match greatest dimension length of zone
+            _light.pointLightOuterRadius *= Mathf.Max(size.x, size.y);
         }
 
         private void OnEnable()
         {
-            active = false;
-
             // TODO: Activate the End Zone with the Game State Manager
             // GameStateManager.OnLevelWinCondition += ActivateZone
 
@@ -46,13 +46,13 @@ namespace PackItUp.Interactables
 
         public void ActivateZone()
         {
-            // Turn end zone on after all mandatory items are collected
-            active = true;
+            // Enable light to indicate that the player can exit the level
+            _light.enabled = true;
         }
 
-        void DeactivateZone()
+        public void DeactivateZone()
         {
-            active = false;
+            _light.enabled = false;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
