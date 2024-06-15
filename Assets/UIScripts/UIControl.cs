@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UIControl : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class UIControl : MonoBehaviour
     //temp variable to control timer (in the future another script should handle this)
     public bool startTimer;
     bool timerStarted = false;
+
+    public UnityEvent timerFinished;
 
     //timer reference
     Timer timer;
@@ -62,6 +65,16 @@ public class UIControl : MonoBehaviour
         }
     }
 
+    public void StartTimer()
+    {
+        startTimer = true;
+    }
+
+    public void TogglePause()
+    {
+        timer.TogglePause();
+    }
+
     private IEnumerator InitTimer()
     {
         timerUIInfoText.transform.parent.gameObject.SetActive(true);
@@ -95,6 +108,7 @@ public class UIControl : MonoBehaviour
         startCountdown = false;
         timerStarted = false;
         UpdateTimerInfoText(timerStartText[3]);
+        timerFinished?.Invoke();
     }
 
 
