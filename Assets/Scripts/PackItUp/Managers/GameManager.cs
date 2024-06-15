@@ -1,8 +1,11 @@
 using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using System.Linq;
 using PackItUp.Controllers;
+using PackItUp.Managers;
+using PackItUp.MockSystems;
+
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -23,11 +26,24 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-
-        // _levels = LevelManager.Instance.GenerateLevels();
-        _currentLevel = _levels.First();
+        if (Instance != null && Instance != this) {
+            Debug.LogError($"There's more than one GameManager in the scene! {transform} - {Instance}");
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        // DontDestroyOnLoad(gameObject);
+        _currentLevel = FindObjectOfType<MockLevel>();
+        
         _gameStateManager = Instantiate(gameStateManagerPrefab, transform);
+        
+        // _levels = LevelManager.Instance.GenerateLevels();
+        //_currentLevel = _levels.First();
+        //TODO If levels are really going to be MonoBehaviours, then they should be "Instantiated" ... The alternative is treat them as "generated data" and not GameObjects
+        
+
+
         // Create player controllers, set up timer, etc
     }
 
