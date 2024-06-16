@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: PlayerMovementConfig
   m_EditorClassIdentifier: 
   topSpeed: 10
-  acceleration: 1
-  momentum: 0
+  acceleration: 20
+  momentum: 0.5
+  dashDuration: 0.1
+  dashSpeed: 20
+  dashCooldown: 5

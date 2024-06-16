@@ -8,7 +8,11 @@ namespace PackItUp.Scriptable {
         public PlayerValue player;
         
         public InputAction GetMoveAction(CharacterControllerBindings playerControls) {
-            return player == PlayerValue.Player1 ? playerControls.P1Controls.Move : playerControls.P2Controls.Move;
+            return player == PlayerValue.Player1 ? playerControls.KeyboardLeft.Move : playerControls.KeyboardRight.Move;
+        }
+        
+        public InputAction GetDashAction(CharacterControllerBindings playerControls) {
+            return player == PlayerValue.Player1 ? playerControls.KeyboardLeft.Dash : playerControls.KeyboardRight.Dash;
         }
     }
 
