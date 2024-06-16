@@ -3,23 +3,51 @@ using UnityEngine;
 
 namespace PackItUp.Inventory
 {
-    public class InventoryController : MonoBehaviour
+    public class InventoryController : Singleton<InventoryController>
     {
+        [SerializeField] SOMapRequirementConfig soMapRequirementConfig;
+
         InventoryData data;
+
+        public InventoryUI UI { get; set; } = null;
+
+        protected override void OnInit()
+        {
+            data = new();
+
+            //load default map config
+            LoadMapData(1);
+        }
 
         public void AddItem(int itemId, int level = 1, int quantity = 1)
         {
             data.AddItem(itemId, level, quantity);
+
+            if (UI != null && UI.isActiveAndEnabled)
+            {
+                UI.UpdateData();
+            }
         }
 
         public void RemoveItem(int itemId, int level = 1)
         {
             data.RemoveItem(itemId, level);
+
+            if (UI != null && UI.isActiveAndEnabled)
+            {
+                UI.UpdateData();
+            }
         }
 
         public bool UseItem(int itemId, int level = 1, int quantity = 1)
         {
-            return data.UseItem(itemId, level, quantity);
+            bool used = data.UseItem(itemId, level, quantity);
+
+            if (UI != null && UI.isActiveAndEnabled)
+            {
+                UI.UpdateData();
+            }
+            return used;
         }
 
         public void Reset()
@@ -34,7 +62,18 @@ namespace PackItUp.Inventory
 
         public void LoadMapData(int mapId)
         {
-            //todo
+            data.RequiredItemList = soMapRequirementConfig.GetRequirement(mapId).requiredItemList;
+            data.InitMandatoryItems();
+        }
+
+        public int GetRequiredItemQuantity(int itemId, int level)
+        {
+            return data.GetRequiredItemQuantity(itemId, level);
+        }
+
+        public List<ItemData> GetItemDataList()
+        {
+            return data.CurrentList;
         }
     }
 }

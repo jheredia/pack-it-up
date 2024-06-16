@@ -8,6 +8,14 @@ namespace PackItUp.Inventory
         List<ItemData> currentItemList = new();
         List<ItemData> requiredItemList = new();
 
+        public List<ItemData> CurrentList { get { return currentItemList; } }
+
+        public List<ItemData> RequiredItemList
+        {
+            get { return requiredItemList; }
+            set { requiredItemList = value; }
+        }
+
         public void AddItem(int itemId, int level = 1, int quantity = 1)
         {
             bool exist = false;
@@ -88,6 +96,16 @@ namespace PackItUp.Inventory
             currentItemList.Clear();
         }
 
+        public void InitMandatoryItems()
+        {
+            Reset();
+            for (int i = 0; i < requiredItemList.Count; i++)
+            {
+                ItemData item = new(requiredItemList[i].itemId, requiredItemList[i].level, 0);
+                currentItemList.Add(item);
+            }
+        }
+
         public bool CheckMandatoryItems()
         {
             foreach (ItemData requiredItem in requiredItemList)
@@ -96,6 +114,18 @@ namespace PackItUp.Inventory
                     return false;
             }
             return true;
+        }
+
+        public int GetRequiredItemQuantity(int itemId, int level)
+        {
+            for (int i = 0; i < requiredItemList.Count; i++)
+            {
+                if (requiredItemList[i].itemId == itemId && requiredItemList[i].level == level)
+                {
+                    return requiredItemList[i].quantity;
+                }
+            }
+            return 0;
         }
     }
 }
