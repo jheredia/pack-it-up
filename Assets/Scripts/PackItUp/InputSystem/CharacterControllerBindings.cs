@@ -126,7 +126,7 @@ namespace PackItUp.InputSystem
                 {
                     ""name"": ""up"",
                     ""id"": ""71ee762a-ded2-4ae0-8cde-f4bd48a9b4aa"",
-                    ""path"": ""<Keyboard>/numpad8"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -137,7 +137,7 @@ namespace PackItUp.InputSystem
                 {
                     ""name"": ""down"",
                     ""id"": ""f9730997-7f73-43f7-870f-8610b8426d05"",
-                    ""path"": ""<Keyboard>/numpad2"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -148,7 +148,7 @@ namespace PackItUp.InputSystem
                 {
                     ""name"": ""left"",
                     ""id"": ""e8dcabb9-7adc-4033-a3e7-1ef24215444a"",
-                    ""path"": ""<Keyboard>/numpad4"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -159,7 +159,7 @@ namespace PackItUp.InputSystem
                 {
                     ""name"": ""right"",
                     ""id"": ""873b4d01-7cfd-4fc9-a339-796f29c0b71a"",
-                    ""path"": ""<Keyboard>/numpad6"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
