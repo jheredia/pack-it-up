@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PickupEventRouter : MonoBehaviour
 {
-    public PickupUnityEvent onPickupPickedUp;
+    public CharacterPickupPairEvent onPickupPickedUp;
 
     public void AcceptNewObject(GameObject obj)
     {

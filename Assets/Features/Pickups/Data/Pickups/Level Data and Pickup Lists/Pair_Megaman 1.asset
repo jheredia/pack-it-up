@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24a7e84dfb39de24daeccb1494fd4480, type: 3}
-  m_Name: Test Level Pickup List
+  m_Script: {fileID: 11500000, guid: 2bf3aeb88e1df0f4291db1460500bee4, type: 3}
+  m_Name: Pair_Megaman 1
   m_EditorClassIdentifier: 
-  list:
-  - {fileID: 11400000, guid: 5ba616ca0eb1f264b8b949173a816ebe, type: 2}
-  - {fileID: 11400000, guid: a59018c01c0b75d48820bd07f4b80534, type: 2}
+  pair:
+    prefab: {fileID: 8212334846494063578, guid: 7660ca20aef9b674cb127568621484a2, type: 3}
+    number: 1

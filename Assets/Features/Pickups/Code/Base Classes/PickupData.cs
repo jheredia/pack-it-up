@@ -10,6 +10,7 @@ public class PickupData
     public string displayName;
     public Sprite bigSprite;
     public bool isKeyItem = false;
+    public bool isInventoryItem = false;
     public bool isStackItem = false;
     public int stackNumber = 0;
 
@@ -19,6 +20,7 @@ public class PickupData
         displayName = data.displayName;
         bigSprite = data.bigSprite;
         isKeyItem = data.isKeyItem;
+        isInventoryItem = data.isInventoryItem;
         isStackItem = data.isStackItem;
         stackNumber = data.stackNumber;
         return this;

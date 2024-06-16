@@ -7,11 +7,11 @@ public class Component_UIDisplayPickupImage : MonoBehaviour
 {
     public Image image;
 
-    public void AcceptPickupData(PickupData data)
+    public void AcceptPickupData(CharacterPickupPair pair)
     {
         Debug.Log("test");
         StopAllCoroutines();
-        image.sprite = data.bigSprite;
+        image.sprite = pair.pickupData.bigSprite;
         StartCoroutine(StopDisplayingSprite());
     }
 

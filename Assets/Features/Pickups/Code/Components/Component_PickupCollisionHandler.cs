@@ -8,13 +8,14 @@ public class Component_PickupCollisionHandler : MonoBehaviour
     public Collider2D myCollider;
     public Component_PickupDataHandler myDataHandler;
     private bool hasBeenPickedUp = false;
-    public PickupUnityEvent onPickup;
+    public CharacterPickupPairEvent onPickup;
 
     public void OnTriggerEnter2D(Collider2D col)
     {
         if (hasBeenPickedUp) return;
         if (!col.TryGetComponent(out Component_PickupHandlerCharacter pickupHandler)) return;
         hasBeenPickedUp = true;
-        onPickup?.Invoke(myDataHandler.dataWrapper.data);
+        CharacterPickupPair pair = new CharacterPickupPair().Clone(col.gameObject, myDataHandler.dataWrapper.data);
+        onPickup?.Invoke(pair);
     }
 }
