@@ -12,3 +12,114 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797a9d11c25d0c047b84aa58533150ee, type: 3}
   m_Name: MapRequirementConfig
   m_EditorClassIdentifier: 
+  requirementList:
+  - mapId: 1
+    requiredItemList:
+    - itemId: 1
+      level: 1
+      quantity: 2
+    - itemId: 2
+      level: 1
+      quantity: 2
+    - itemId: 3
+      level: 1
+      quantity: 2
+  - mapId: 2
+    requiredItemList:
+    - itemId: 1
+      level: 1
+      quantity: 2
+    - itemId: 2
+      level: 1
+      quantity: 2
+    - itemId: 3
+      level: 1
+      quantity: 2
+  - mapId: 3
+    requiredItemList:
+    - itemId: 1
+      level: 1
+      quantity: 2
+    - itemId: 2
+      level: 1
+      quantity: 2
+    - itemId: 3
+      level: 1
+      quantity: 2
+  - mapId: 4
+    requiredItemList:
+    - itemId: 1
+      level: 1
+      quantity: 2
+    - itemId: 2
+      level: 1
+      quantity: 2
+    - itemId: 3
+      level: 1
+      quantity: 2
+  - mapId: 5
+    requiredItemList:
+    - itemId: 1
+      level: 1
+      quantity: 2
+    - itemId: 2
+      level: 1
+      quantity: 2
+    - itemId: 3
+      level: 1
+      quantity: 2
+  - mapId: 6
+    requiredItemList:
+    - itemId: 1
+      level: 1
+      quantity: 2
+    - itemId: 2
+      level: 1
+      quantity: 2
+    - itemId: 3
+      level: 1
+      quantity: 2
+  - mapId: 7
+    requiredItemList:
+    - itemId: 1
+      level: 1
+      quantity: 2
+    - itemId: 2
+      level: 1
+      quantity: 2
+    - itemId: 3
+      level: 1
+      quantity: 2
+  - mapId: 8
+    requiredItemList:
+    - itemId: 1
+      level: 1
+      quantity: 2
+    - itemId: 2
+      level: 1
+      quantity: 2
+    - itemId: 3
+      level: 1
+      quantity: 2
+  - mapId: 9
+    requiredItemList:
+    - itemId: 1
+      level: 1
+      quantity: 2
+    - itemId: 2
+      level: 1
+      quantity: 2
+    - itemId: 3
+      level: 1
+      quantity: 2
+  - mapId: 10
+    requiredItemList:
+    - itemId: 1
+      level: 1
+      quantity: 2
+    - itemId: 2
+      level: 1
+      quantity: 2
+    - itemId: 3
+      level: 1
+      quantity: 2
