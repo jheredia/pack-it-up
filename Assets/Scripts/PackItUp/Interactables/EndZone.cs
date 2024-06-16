@@ -28,7 +28,9 @@ namespace PackItUp.Interactables
         private GameStateManager _gameStateManager;
 
         // Indication of how many players are on an end zone
-        private int _endZonePlayerCount = 0;
+        private Collider2D[] zoneColliders;
+        private ContactFilter2D contactFilter;
+        private bool checkContacts;
 
         private void Awake()
         {
@@ -47,6 +49,9 @@ namespace PackItUp.Interactables
 
             _gameStateManager = GameManager.Instance.GetGameStateManager();
 
+            // Track players in end zone's box collider
+            contactFilter = new ContactFilter2D();
+            zoneColliders = new Collider2D[2];  // For max of 2 players
         }
 
         private void OnEnable()
@@ -84,6 +89,22 @@ namespace PackItUp.Interactables
         //  _light.enabled = activate;
         //}
 
+        private void FixedUpdate()
+        {
+            if (checkContacts && _bc.enabled)
+            {
+                int results = _bc.OverlapCollider(contactFilter, zoneColliders);
+                if (results <= 0) 
+                {
+                    // The end zone is empty, and the exit condition is not met
+                    Debug.Log("End Zone Empty");
+                    OnEndZoneEmpty?.Invoke(this, EventArgs.Empty);
+                }
+
+                checkContacts = false;
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // Get the tag of the collision's GameObject to check that it's a player
@@ -91,7 +112,6 @@ namespace PackItUp.Interactables
             if (collision.gameObject.CompareTag("Player"))
             {
                 Debug.Log("End Zone Enter");
-                _endZonePlayerCount++;
                 OnPlayerEnteredZone?.Invoke(this, collision.gameObject);
             }
         }
@@ -102,13 +122,9 @@ namespace PackItUp.Interactables
             if (collision.gameObject.CompareTag("Player"))
             {
                 Debug.Log("End Zone Exit");
-                _endZonePlayerCount--;
                 OnPlayerExitZone?.Invoke(this, collision.gameObject);
-            }
-            if (_endZonePlayerCount <= 0)
-            {
-                Debug.Log("End Zone Empty");
-                OnEndZoneEmpty?.Invoke(this, EventArgs.Empty);
+                // Check FixedUpdate to see if that was the last player in the end zone
+                checkContacts = true;
             }
         }
     }
