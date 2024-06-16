@@ -27,9 +27,12 @@ namespace PackItUp.Managers
         private GameManager _gameManager;
 
         // Win condition will start as false as the player has not completed the objective of the game
+
+        [SerializeField] // For testing purposes
         private bool _winCondition = false;
 
         // Exit condition will start as false as neither player is on an end zone yet
+        [SerializeField] // For testing purposes
         private bool _exitCondition = false;
 
 
@@ -58,6 +61,8 @@ namespace PackItUp.Managers
             _players = _gameManager.GetPlayers();
             _currentLevel = _gameManager.GetLevel();
             _endZones = _currentLevel.GetEndZones();
+            _exitCondition = false;
+            _winCondition = false;
         }
 
         private void OnEnable()
@@ -89,6 +94,7 @@ namespace PackItUp.Managers
 
         private void CompleteObjective(object sender, EventArgs e)
         {
+            Debug.Log("Objective completed");
             _winCondition = true;
             OnObjectiveCompleted?.Invoke(this, EventArgs.Empty);
             // Another player is still in an end zone
@@ -97,6 +103,7 @@ namespace PackItUp.Managers
 
         private void TryEndGameSuccessfully(object sender, GameObject playerObject)
         {
+            Debug.Log("Try end game");
             //     var objectName = playerObject.transform.parent ? playerObject.transform.parent.name : playerObject.name;
             //     //NOTE... right now this is only called by the end zone, that's why Im casting the sender to EndZone
             //     Debug.Log($"Player {objectName} entered Zone {((EndZone)sender).name}");
@@ -119,16 +126,19 @@ namespace PackItUp.Managers
 
         private void DeactivateExitCondition(object sender, EventArgs e)
         {
+            Debug.Log("Deactivate exit condition");
             _exitCondition = false;
         }
 
         private void EndGameSuccessState()
         {
+            Debug.Log("End level success");
             OnLevelSuccess?.Invoke(this, EventArgs.Empty);
         }
 
         private void EndGameFailedState(object sender, EventArgs e)
         {
+            Debug.Log("End level fail");
             OnLevelFailed?.Invoke(this, EventArgs.Empty);
         }
 

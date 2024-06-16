@@ -87,6 +87,7 @@ namespace PackItUp.Interactables
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // Get the tag of the collision's GameObject to check that it's a player
+            Debug.Log(collision.gameObject.tag);
             if (collision.gameObject.CompareTag("Player"))
             {
                 Debug.Log("End Zone Enter");
