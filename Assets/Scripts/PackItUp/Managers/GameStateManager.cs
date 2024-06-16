@@ -5,7 +5,8 @@ using PackItUp.Interactables;
 using PackItUp.MockSystems;
 using UnityEngine;
 
-namespace PackItUp.Managers {
+namespace PackItUp.Managers
+{
     public class GameStateManager : MonoBehaviour
     {
         // Inform that the player completed the level successfully
@@ -17,9 +18,10 @@ namespace PackItUp.Managers {
         // Inform of a game start
         public event EventHandler OnLevelStart;
 
-
         // Inform that the player completed the objective
         public event EventHandler OnObjectiveCompleted;
+
+        public event EventHandler OnEndGameCountdownCancel;
 
         // There will only be one game manager that handles when to start a new game loop
         private GameManager _gameManager;
@@ -30,8 +32,6 @@ namespace PackItUp.Managers {
         // Exit condition will start as false as neither player is on an end zone yet
         private bool _exitCondition = false;
 
-        // Indication of how many players are on an end zone
-        private int _endZonePlayerCount = 0;
 
         // We need to know how many players are present in the game so we can enable/disable its movement between levels
         private List<TopDownCharacterController> _players;
@@ -63,26 +63,27 @@ namespace PackItUp.Managers {
         private void OnEnable()
         {
             _gameManager.OnGameStart += StartGame;
+            _inventory.OnKeyItemsCollected += CompleteObjective;
             _timer.OnTimerRunOut += EndGameFailedState;
             EndZone.OnPlayerEnteredZone += TryEndGameSuccessfully;
-            EndZone.OnPlayerExitZone += CancelEndGameCountdown;
-            _inventory.OnKeyItemsCollected += CompleteObjective;
+            // EndZone.OnPlayerExitZone += CancelEndGameCountdown;
+            EndZone.OnEndZoneEmpty += DeactivateExitCondition;
         }
 
         private void OnDisable()
         {
             _gameManager.OnGameStart -= StartGame;
+            _inventory.OnKeyItemsCollected -= CompleteObjective;
             _timer.OnTimerRunOut -= EndGameFailedState;
             EndZone.OnPlayerEnteredZone -= TryEndGameSuccessfully;
-            EndZone.OnPlayerExitZone -= CancelEndGameCountdown;
-            _inventory.OnKeyItemsCollected -= CompleteObjective;
+            // EndZone.OnPlayerExitZone -= CancelEndGameCountdown;
+            EndZone.OnEndZoneEmpty -= DeactivateExitCondition;
         }
 
         private void StartGame(object sender, EventArgs e)
         {
             _winCondition = false;
             OnLevelStart?.Invoke(this, EventArgs.Empty);
-            _endZonePlayerCount = 0;
         }
 
 
@@ -96,28 +97,29 @@ namespace PackItUp.Managers {
 
         private void TryEndGameSuccessfully(object sender, GameObject playerObject)
         {
-            var objectName = playerObject.transform.parent ? playerObject.transform.parent.name : playerObject.name;
-            //NOTE... right now this is only called by the end zone, that's why Im casting the sender to EndZone
-            Debug.Log($"Player {objectName} entered Zone {((EndZone)sender).name}");
-            //JUST TO TEST THE VISUAL CUE
-            EndZone.ActivateCue(true);
-            // Checking if this is the only player on an end zone currently
-            if (_endZonePlayerCount <= 0) _exitCondition = true;
-            _endZonePlayerCount++;
+            //     var objectName = playerObject.transform.parent ? playerObject.transform.parent.name : playerObject.name;
+            //     //NOTE... right now this is only called by the end zone, that's why Im casting the sender to EndZone
+            //     Debug.Log($"Player {objectName} entered Zone {((EndZone)sender).name}");
+            //     //JUST TO TEST THE VISUAL CUE
+            //     EndZone.ActivateCue(true);
+            _exitCondition = true;
             if (_winCondition) EndGameSuccessState();
         }
 
         //JUST ADDED THIS TO TEST THE VISUAL CUE - AND COULD BE USEFUL IF THE PLAYER NOTICE HES MISSING SOMETHING AND GOES TO FETCH IT
         private void CancelEndGameCountdown(object sender, GameObject playerObject)
         {
-            var objectName = playerObject.transform.parent ? playerObject.transform.parent.name : playerObject.name;
-            //NOTE... right now this is only called by the end zone, that's why Im casting the sender to EndZone
-            Debug.Log($"Player {objectName} left Zone {((EndZone)sender).name}");
-            //JUST TO TEST THE VISUAL CUE
-            EndZone.ActivateCue(false);
-            // Checking if this is the only player on an end zone that's exiting the end zone
-            _endZonePlayerCount--;
-            if (_endZonePlayerCount <= 0) _exitCondition = false;
+            OnEndGameCountdownCancel?.Invoke(this, EventArgs.Empty);
+            // var objectName = playerObject.transform.parent ? playerObject.transform.parent.name : playerObject.name;
+            // //NOTE... right now this is only called by the end zone, that's why Im casting the sender to EndZone
+            // Debug.Log($"Player {objectName} left Zone {((EndZone)sender).name}");
+            // //JUST TO TEST THE VISUAL CUE
+            // EndZone.ActivateCue(false);
+        }
+
+        private void DeactivateExitCondition(object sender, EventArgs e)
+        {
+            _exitCondition = false;
         }
 
         private void EndGameSuccessState()
