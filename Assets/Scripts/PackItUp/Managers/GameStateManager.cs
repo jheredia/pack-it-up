@@ -66,7 +66,8 @@ namespace PackItUp.Managers
             _winCondition = false;
         }
 
-        private void OnEnable() {
+        private void OnEnable()
+        {
             _gameManager.OnGameStart += StartGame;
             _inventory.OnKeyItemsCollected += CompleteObjective;
             _timer.OnTimerRunOut += EndGameFailedState;
@@ -75,7 +76,8 @@ namespace PackItUp.Managers
             EndZone.OnEndZoneEmpty += DeactivateExitCondition;
         }
 
-        private void OnDisable() {
+        private void OnDisable()
+        {
             _gameManager.OnGameStart -= StartGame;
             _inventory.OnKeyItemsCollected -= CompleteObjective;
             _timer.OnTimerRunOut -= EndGameFailedState;
@@ -84,7 +86,8 @@ namespace PackItUp.Managers
             EndZone.OnEndZoneEmpty -= DeactivateExitCondition;
         }
 
-        private void StartGame(object sender, EventArgs e) {
+        private void StartGame(object sender, EventArgs e)
+        {
             _winCondition = false;
             OnLevelStart?.Invoke(this, EventArgs.Empty);
         }
@@ -118,7 +121,7 @@ namespace PackItUp.Managers
             //NOTE... right now this is only called by the end zone, that's why Im casting the sender to EndZone
             Debug.Log($"Player {objectName} left Zone {((EndZone)sender).name}");
             //JUST TO TEST THE VISUAL CUE
-            EndZone.ActivateCue(false);
+            // EndZone.ActivateCue(false);
             OnEndGameCountdownCancel?.Invoke(this, EventArgs.Empty);
         }
 
