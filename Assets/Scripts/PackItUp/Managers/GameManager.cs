@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using PackItUp.Controllers;
 using PackItUp.Managers;
+using PackItUp.MapGenerator;
 using PackItUp.MockSystems;
 
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,9 +22,26 @@ public class GameManager : MonoBehaviour
     [SerializeField] MockInventory _inventory;
 
     private List<TopDownCharacterController> _players;
-    private List<MockLevel> _levels = new();
-    private MockLevel _currentLevel, _lastLevel;
+    private List<Level> _levels = new();
+    [SerializeField]
+    private Level _currentLevel, _lastLevel;
     private GameStateManager _gameStateManager;
+
+
+    // Luciano
+    [SerializeField]
+    private int _levelIndex;
+    [SerializeField]
+    private List<AbstractMapGenerator> _levelGenerators;
+
+    [field: SerializeField]
+    public UnityEvent OnLoadLevelStart { get; set; }
+
+    [field: SerializeField]
+    public UnityEvent<float> OnLoadLevelProgress { get; set; }
+
+    [field: SerializeField]
+    public UnityEvent OnLoadLevelFinish { get; set; }
 
     private void Awake()
     {
@@ -34,14 +53,14 @@ public class GameManager : MonoBehaviour
         
         Instance = this;
         // DontDestroyOnLoad(gameObject);
-        _currentLevel = FindObjectOfType<MockLevel>();
+        //_currentLevel = FindObjectOfType<MockLevel>();
         
         _gameStateManager = Instantiate(gameStateManagerPrefab, transform);
-        
+
         // _levels = LevelManager.Instance.GenerateLevels();
         //_currentLevel = _levels.First();
         //TODO If levels are really going to be MonoBehaviours, then they should be "Instantiated" ... The alternative is treat them as "generated data" and not GameObjects
-        
+        _currentLevel.Generator = _levelGenerators[_levelIndex];
 
 
         // Create player controllers, set up timer, etc
@@ -64,7 +83,7 @@ public class GameManager : MonoBehaviour
         StartGame();
     }
 
-    public MockLevel GetLevel() => _currentLevel;
+    public Level GetLevel() => _currentLevel;
 
     public MockInventory GetInventory() => _inventory;
 

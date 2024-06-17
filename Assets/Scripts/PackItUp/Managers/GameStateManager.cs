@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using PackItUp.Controllers;
 using PackItUp.Interactables;
+using PackItUp.MapGenerator;
 using PackItUp.MockSystems;
 using UnityEngine;
 
@@ -47,7 +48,7 @@ namespace PackItUp.Managers
         private MockTimer _timer;
 
         // The current level, this will live in the game manager, the game state manager is agnostic of which level is the player on
-        private MockLevel _currentLevel;
+        private Level _currentLevel;
 
         // In each level, we'll have an end zone, this will be activate once the objective is completed allowing the player 
         // to end the game in a success state
@@ -113,12 +114,12 @@ namespace PackItUp.Managers
         //JUST ADDED THIS TO TEST THE VISUAL CUE - AND COULD BE USEFUL IF THE PLAYER NOTICE HES MISSING SOMETHING AND GOES TO FETCH IT
         private void CancelEndGameCountdown(object sender, GameObject playerObject)
         {
+            var objectName = playerObject.transform.parent ? playerObject.transform.parent.name : playerObject.name;
+            //NOTE... right now this is only called by the end zone, that's why Im casting the sender to EndZone
+            Debug.Log($"Player {objectName} left Zone {((EndZone)sender).name}");
+            //JUST TO TEST THE VISUAL CUE
+            EndZone.ActivateCue(false);
             OnEndGameCountdownCancel?.Invoke(this, EventArgs.Empty);
-            // var objectName = playerObject.transform.parent ? playerObject.transform.parent.name : playerObject.name;
-            // //NOTE... right now this is only called by the end zone, that's why Im casting the sender to EndZone
-            // Debug.Log($"Player {objectName} left Zone {((EndZone)sender).name}");
-            // //JUST TO TEST THE VISUAL CUE
-            // EndZone.ActivateCue(false);
         }
 
         private void DeactivateExitCondition(object sender, EventArgs e)
