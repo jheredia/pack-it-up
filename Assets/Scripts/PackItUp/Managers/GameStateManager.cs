@@ -6,8 +6,7 @@ using PackItUp.MockSystems;
 using UnityEngine;
 
 namespace PackItUp.Managers {
-    public class GameStateManager : MonoBehaviour
-    {
+    public class GameStateManager : MonoBehaviour {
         // Inform that the player completed the level successfully
         public event EventHandler OnLevelSuccess;
 
@@ -44,8 +43,7 @@ namespace PackItUp.Managers {
         // to end the game in a success state
         private EndZone[] _endZones;
 
-        private void Awake() 
-        {
+        private void Awake() {
             _gameManager = GameManager.Instance;
             _timer = _gameManager.GetTimer();
             _inventory = _gameManager.GetInventory();
@@ -54,8 +52,7 @@ namespace PackItUp.Managers {
             _endZones = _currentLevel.GetEndZones();
         }
 
-        private void OnEnable()
-        {
+        private void OnEnable() {
             _gameManager.OnGameStart += StartGame;
             _timer.OnTimerRunOut += EndGameFailedState;
             EndZone.OnPlayerEnteredZone += TryEndGameSuccessfully;
@@ -63,8 +60,7 @@ namespace PackItUp.Managers {
             _inventory.OnKeyItemsCollected += CompleteObjective;
         }
 
-        private void OnDisable()
-        {
+        private void OnDisable() {
             _gameManager.OnGameStart -= StartGame;
             _timer.OnTimerRunOut -= EndGameFailedState;
             EndZone.OnPlayerEnteredZone -= TryEndGameSuccessfully;
@@ -72,21 +68,18 @@ namespace PackItUp.Managers {
             _inventory.OnKeyItemsCollected -= CompleteObjective;
         }
 
-        private void StartGame(object sender, EventArgs e)
-        {
+        private void StartGame(object sender, EventArgs e) {
             _winCondition = false;
             OnLevelStart?.Invoke(this, EventArgs.Empty);
         }
 
 
-        private void CompleteObjective(object sender, EventArgs e)
-        {
+        private void CompleteObjective(object sender, EventArgs e) {
             _winCondition = true;
             OnObjectiveCompleted?.Invoke(this, EventArgs.Empty);
         }
 
-        private void TryEndGameSuccessfully(object sender, GameObject playerObject)
-        {
+        private void TryEndGameSuccessfully(object sender, GameObject playerObject) {
             var objectName = playerObject.transform.parent ? playerObject.transform.parent.name : playerObject.name;
             //NOTE... right now this is only called by the end zone, that's why Im casting the sender to EndZone
             Debug.Log($"Player {objectName} entered Zone {((EndZone)sender).name}");
@@ -94,7 +87,7 @@ namespace PackItUp.Managers {
             EndZone.ActivateCue(true);
             if (_winCondition) EndGameSuccessState();
         }
-        
+
         //JUST ADDED THIS TO TEST THE VISUAL CUE - AND COULD BE USEFUL IF THE PLAYER NOTICE HES MISSING SOMETHING AND GOES TO FETCH IT
         private void CancelEndGameCountdown(object sender, GameObject playerObject) {
             var objectName = playerObject.transform.parent ? playerObject.transform.parent.name : playerObject.name;
@@ -104,14 +97,12 @@ namespace PackItUp.Managers {
             EndZone.ActivateCue(false);
         }
 
-        private void EndGameSuccessState()
-        {
+        private void EndGameSuccessState() {
             OnLevelSuccess?.Invoke(this, EventArgs.Empty);
         }
 
-        private void EndGameFailedState(object sender, EventArgs e)
-        {
+        private void EndGameFailedState(object sender, EventArgs e) {
             OnLevelFailed?.Invoke(this, EventArgs.Empty);
         }
-
+    }
 }
