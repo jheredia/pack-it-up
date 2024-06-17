@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 828dd145d61e3784b8889caaffe63814
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Typeface Mario World Pixel Outline
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e13c202433b3e2341b335f0282ffbb82, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
