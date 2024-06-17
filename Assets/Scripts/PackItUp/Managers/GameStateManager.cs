@@ -65,8 +65,7 @@ namespace PackItUp.Managers
             _winCondition = false;
         }
 
-        private void OnEnable()
-        {
+        private void OnEnable() {
             _gameManager.OnGameStart += StartGame;
             _inventory.OnKeyItemsCollected += CompleteObjective;
             _timer.OnTimerRunOut += EndGameFailedState;
@@ -75,8 +74,7 @@ namespace PackItUp.Managers
             EndZone.OnEndZoneEmpty += DeactivateExitCondition;
         }
 
-        private void OnDisable()
-        {
+        private void OnDisable() {
             _gameManager.OnGameStart -= StartGame;
             _inventory.OnKeyItemsCollected -= CompleteObjective;
             _timer.OnTimerRunOut -= EndGameFailedState;
@@ -85,8 +83,7 @@ namespace PackItUp.Managers
             EndZone.OnEndZoneEmpty -= DeactivateExitCondition;
         }
 
-        private void StartGame(object sender, EventArgs e)
-        {
+        private void StartGame(object sender, EventArgs e) {
             _winCondition = false;
             OnLevelStart?.Invoke(this, EventArgs.Empty);
         }

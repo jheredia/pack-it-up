@@ -26,7 +26,7 @@ namespace PackItUp.InputSystem
     ""name"": ""CharacterControllerBindings"",
     ""maps"": [
         {
-            ""name"": ""P1Controls"",
+            ""name"": ""KeyboardLeft"",
             ""id"": ""86e4dea1-c8ba-456c-a35c-edc99091b9ed"",
             ""actions"": [
                 {
@@ -37,6 +37,15 @@ namespace PackItUp.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""147a4d6f-860c-40a4-abe6-2e6eca11e39a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -94,11 +103,22 @@ namespace PackItUp.InputSystem
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d39dfe8-a22a-493c-aba7-085a3c861a46"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
-            ""name"": ""P2Controls"",
+            ""name"": ""KeyboardRight"",
             ""id"": ""659e571e-15e2-4577-970b-cd9b92baa349"",
             ""actions"": [
                 {
@@ -109,6 +129,15 @@ namespace PackItUp.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""2f080f85-4b72-4c36-bfdc-a1caa84c198f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -126,7 +155,7 @@ namespace PackItUp.InputSystem
                 {
                     ""name"": ""up"",
                     ""id"": ""71ee762a-ded2-4ae0-8cde-f4bd48a9b4aa"",
-                    ""path"": ""<Keyboard>/numpad8"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -137,7 +166,7 @@ namespace PackItUp.InputSystem
                 {
                     ""name"": ""down"",
                     ""id"": ""f9730997-7f73-43f7-870f-8610b8426d05"",
-                    ""path"": ""<Keyboard>/numpad2"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -148,7 +177,7 @@ namespace PackItUp.InputSystem
                 {
                     ""name"": ""left"",
                     ""id"": ""e8dcabb9-7adc-4033-a3e7-1ef24215444a"",
-                    ""path"": ""<Keyboard>/numpad4"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -159,13 +188,24 @@ namespace PackItUp.InputSystem
                 {
                     ""name"": ""right"",
                     ""id"": ""873b4d01-7cfd-4fc9-a339-796f29c0b71a"",
-                    ""path"": ""<Keyboard>/numpad6"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea038950-e37d-454d-8b68-0eb9b891366b"",
+                    ""path"": ""<Keyboard>/rightShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -184,12 +224,14 @@ namespace PackItUp.InputSystem
         }
     ]
 }");
-            // P1Controls
-            m_P1Controls = asset.FindActionMap("P1Controls", throwIfNotFound: true);
-            m_P1Controls_Move = m_P1Controls.FindAction("Move", throwIfNotFound: true);
-            // P2Controls
-            m_P2Controls = asset.FindActionMap("P2Controls", throwIfNotFound: true);
-            m_P2Controls_Move = m_P2Controls.FindAction("Move", throwIfNotFound: true);
+            // KeyboardLeft
+            m_KeyboardLeft = asset.FindActionMap("KeyboardLeft", throwIfNotFound: true);
+            m_KeyboardLeft_Move = m_KeyboardLeft.FindAction("Move", throwIfNotFound: true);
+            m_KeyboardLeft_Dash = m_KeyboardLeft.FindAction("Dash", throwIfNotFound: true);
+            // KeyboardRight
+            m_KeyboardRight = asset.FindActionMap("KeyboardRight", throwIfNotFound: true);
+            m_KeyboardRight_Move = m_KeyboardRight.FindAction("Move", throwIfNotFound: true);
+            m_KeyboardRight_Dash = m_KeyboardRight.FindAction("Dash", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -248,97 +290,113 @@ namespace PackItUp.InputSystem
             return asset.FindBinding(bindingMask, out action);
         }
 
-        // P1Controls
-        private readonly InputActionMap m_P1Controls;
-        private List<IP1ControlsActions> m_P1ControlsActionsCallbackInterfaces = new List<IP1ControlsActions>();
-        private readonly InputAction m_P1Controls_Move;
-        public struct P1ControlsActions
+        // KeyboardLeft
+        private readonly InputActionMap m_KeyboardLeft;
+        private List<IKeyboardLeftActions> m_KeyboardLeftActionsCallbackInterfaces = new List<IKeyboardLeftActions>();
+        private readonly InputAction m_KeyboardLeft_Move;
+        private readonly InputAction m_KeyboardLeft_Dash;
+        public struct KeyboardLeftActions
         {
             private @CharacterControllerBindings m_Wrapper;
-            public P1ControlsActions(@CharacterControllerBindings wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Move => m_Wrapper.m_P1Controls_Move;
-            public InputActionMap Get() { return m_Wrapper.m_P1Controls; }
+            public KeyboardLeftActions(@CharacterControllerBindings wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_KeyboardLeft_Move;
+            public InputAction @Dash => m_Wrapper.m_KeyboardLeft_Dash;
+            public InputActionMap Get() { return m_Wrapper.m_KeyboardLeft; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(P1ControlsActions set) { return set.Get(); }
-            public void AddCallbacks(IP1ControlsActions instance)
+            public static implicit operator InputActionMap(KeyboardLeftActions set) { return set.Get(); }
+            public void AddCallbacks(IKeyboardLeftActions instance)
             {
-                if (instance == null || m_Wrapper.m_P1ControlsActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_P1ControlsActionsCallbackInterfaces.Add(instance);
+                if (instance == null || m_Wrapper.m_KeyboardLeftActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_KeyboardLeftActionsCallbackInterfaces.Add(instance);
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
 
-            private void UnregisterCallbacks(IP1ControlsActions instance)
+            private void UnregisterCallbacks(IKeyboardLeftActions instance)
             {
                 @Move.started -= instance.OnMove;
                 @Move.performed -= instance.OnMove;
                 @Move.canceled -= instance.OnMove;
+                @Dash.started -= instance.OnDash;
+                @Dash.performed -= instance.OnDash;
+                @Dash.canceled -= instance.OnDash;
             }
 
-            public void RemoveCallbacks(IP1ControlsActions instance)
+            public void RemoveCallbacks(IKeyboardLeftActions instance)
             {
-                if (m_Wrapper.m_P1ControlsActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_KeyboardLeftActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(IP1ControlsActions instance)
+            public void SetCallbacks(IKeyboardLeftActions instance)
             {
-                foreach (var item in m_Wrapper.m_P1ControlsActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_KeyboardLeftActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_P1ControlsActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_KeyboardLeftActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public P1ControlsActions @P1Controls => new P1ControlsActions(this);
+        public KeyboardLeftActions @KeyboardLeft => new KeyboardLeftActions(this);
 
-        // P2Controls
-        private readonly InputActionMap m_P2Controls;
-        private List<IP2ControlsActions> m_P2ControlsActionsCallbackInterfaces = new List<IP2ControlsActions>();
-        private readonly InputAction m_P2Controls_Move;
-        public struct P2ControlsActions
+        // KeyboardRight
+        private readonly InputActionMap m_KeyboardRight;
+        private List<IKeyboardRightActions> m_KeyboardRightActionsCallbackInterfaces = new List<IKeyboardRightActions>();
+        private readonly InputAction m_KeyboardRight_Move;
+        private readonly InputAction m_KeyboardRight_Dash;
+        public struct KeyboardRightActions
         {
             private @CharacterControllerBindings m_Wrapper;
-            public P2ControlsActions(@CharacterControllerBindings wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Move => m_Wrapper.m_P2Controls_Move;
-            public InputActionMap Get() { return m_Wrapper.m_P2Controls; }
+            public KeyboardRightActions(@CharacterControllerBindings wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_KeyboardRight_Move;
+            public InputAction @Dash => m_Wrapper.m_KeyboardRight_Dash;
+            public InputActionMap Get() { return m_Wrapper.m_KeyboardRight; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(P2ControlsActions set) { return set.Get(); }
-            public void AddCallbacks(IP2ControlsActions instance)
+            public static implicit operator InputActionMap(KeyboardRightActions set) { return set.Get(); }
+            public void AddCallbacks(IKeyboardRightActions instance)
             {
-                if (instance == null || m_Wrapper.m_P2ControlsActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_P2ControlsActionsCallbackInterfaces.Add(instance);
+                if (instance == null || m_Wrapper.m_KeyboardRightActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_KeyboardRightActionsCallbackInterfaces.Add(instance);
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
 
-            private void UnregisterCallbacks(IP2ControlsActions instance)
+            private void UnregisterCallbacks(IKeyboardRightActions instance)
             {
                 @Move.started -= instance.OnMove;
                 @Move.performed -= instance.OnMove;
                 @Move.canceled -= instance.OnMove;
+                @Dash.started -= instance.OnDash;
+                @Dash.performed -= instance.OnDash;
+                @Dash.canceled -= instance.OnDash;
             }
 
-            public void RemoveCallbacks(IP2ControlsActions instance)
+            public void RemoveCallbacks(IKeyboardRightActions instance)
             {
-                if (m_Wrapper.m_P2ControlsActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_KeyboardRightActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(IP2ControlsActions instance)
+            public void SetCallbacks(IKeyboardRightActions instance)
             {
-                foreach (var item in m_Wrapper.m_P2ControlsActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_KeyboardRightActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_P2ControlsActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_KeyboardRightActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public P2ControlsActions @P2Controls => new P2ControlsActions(this);
+        public KeyboardRightActions @KeyboardRight => new KeyboardRightActions(this);
         private int m_KeyboardSchemeIndex = -1;
         public InputControlScheme KeyboardScheme
         {
@@ -348,13 +406,15 @@ namespace PackItUp.InputSystem
                 return asset.controlSchemes[m_KeyboardSchemeIndex];
             }
         }
-        public interface IP1ControlsActions
+        public interface IKeyboardLeftActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnDash(InputAction.CallbackContext context);
         }
-        public interface IP2ControlsActions
+        public interface IKeyboardRightActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnDash(InputAction.CallbackContext context);
         }
     }
 }
