@@ -12,11 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2089b4b547d40947a525a0f6b440a48, type: 3}
   m_Name: Movement Rules_Player Character
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  topSpeed: 20
-  acceleration: 1
-=======
   topSpeed: 10
   acceleration: 0.7
->>>>>>> master
   momentum: 0.8
