@@ -990,6 +990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTime: 60
   hasStarted: 0
+  pause: 0
   timerFinished:
     m_PersistentCalls:
       m_Calls: []
@@ -1017,6 +1018,9 @@ MonoBehaviour:
   initTextTransitionTime: 1.35
   timerTime: 10
   startTimer: 0
+  timerFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &891402926
 Transform:
   m_ObjectHideFlags: 0
