@@ -2469,11 +2469,11 @@ MonoBehaviour:
   <Players>k__BackingField:
   - {fileID: 943776527}
   - {fileID: 6321826015366453175}
-  <Exit>k__BackingField: {fileID: 1315951704}
   <OnResetLevel>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  _endZones: []
+  _endZones:
+  - {fileID: 1315951708}
 --- !u!1 &1168815979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2916,11 +2916,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &1315951704 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9129106585638725897, guid: 6e61c99f50ee9ed49b7eebb76661db79, type: 3}
+--- !u!114 &1315951708 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6561102610474052901, guid: 6e61c99f50ee9ed49b7eebb76661db79, type: 3}
   m_PrefabInstance: {fileID: 2575999221832580049}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b916bdc1391ba4bbabfca934588b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1316157038
 GameObject:
   m_ObjectHideFlags: 0

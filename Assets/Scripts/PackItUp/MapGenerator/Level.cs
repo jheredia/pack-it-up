@@ -25,13 +25,12 @@ namespace PackItUp.MapGenerator {
         [field: SerializeField]
         public TopDownCharacterController[] Players { get; set; }
 
-        [field: SerializeField]
-        public GameObject Exit { get; set; }
-
-        private HashSet<int> usedRoomIndexes = new HashSet<int>();
+        // Maintains a list of rooms assigned to players, exit, etc
+        private HashSet<int> _usedRoomIndexes = new HashSet<int>();
 
         [field: SerializeField]
         public UnityEvent OnResetLevel { get; set; }
+
         [SerializeField] private EndZone[] _endZones;
         private List<object> _items;
 
@@ -54,35 +53,37 @@ namespace PackItUp.MapGenerator {
             InitializeExitRoom();
         }
 
+        // Assigns players room
         private void InitializePlayerRoom()
-        {
-            // Set up player room  
+        { 
             StartRoom = Rooms[AssignRoom()];
             StartRoom.RoomKind = RoomType.Start;
             Players[0].transform.position = (Vector2)StartRoom.Center;
             Players[1].transform.position = new Vector2(StartRoom.Center.x + 1,StartRoom.Center.y + 1);
         }
 
+        // Assigns exit room, and sets up the position of the end zone
         private void InitializeExitRoom()
         {
             // Set up exit room
-            if (Exit != null)
+            if (_endZones != null)
             {
                 Room exitRoom = Rooms[AssignRoom()];
                 exitRoom.RoomKind = RoomType.Exit;
-                Exit.transform.position = (Vector2)exitRoom.Center;
+                _endZones[0].transform.position = (Vector2)exitRoom.Center;
             }
         }
 
+        // Chooses a random room that has not been assigned yet
         private int AssignRoom()
         {
-            Assert.AreNotEqual(usedRoomIndexes.Count, Rooms.Count); // this prevents a possibly infinite loop
+            Assert.AreNotEqual(_usedRoomIndexes.Count, Rooms.Count); // this prevents a possibly infinite loop
             int index = Random.Range(0, Rooms.Count);
-            while (usedRoomIndexes.Contains(index))
+            while (_usedRoomIndexes.Contains(index))
             {
                 index = Random.Range(0, Rooms.Count);
             }
-            usedRoomIndexes.Add(index);
+            _usedRoomIndexes.Add(index);
             return index;
         }
 
@@ -98,11 +99,12 @@ namespace PackItUp.MapGenerator {
 
         public void DestroyLevel()
         {
+            // Destroy any decoration items in the level
             foreach (GameObject decoration in GameObject.FindGameObjectsWithTag("Decoration"))
             {
                 Destroy(decoration);
             }
-            usedRoomIndexes.Clear();
+            _usedRoomIndexes.Clear();
         }
     }
 }
