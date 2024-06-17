@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     displayName: test sushi
-    smallSprite: {fileID: 21300000, guid: 7a271393fbe498c499cd8a891d6e852b, type: 3}
     bigSprite: {fileID: 21300000, guid: 7a271393fbe498c499cd8a891d6e852b, type: 3}
-    behaviours:
-    - {fileID: 11400000, guid: f79e9f6597cb3f84186ddc3c4bab7500, type: 2}
+    isKeyItem: 0
+    isInventoryItem: 0
+    isStackItem: 0
+    stackNumber: 0
+    itemEffect: {fileID: 0}

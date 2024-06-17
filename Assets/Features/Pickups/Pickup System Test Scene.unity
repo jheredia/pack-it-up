@@ -783,6 +783,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1448593552}
+        m_TargetAssemblyTypeName: Component_CharacterItemEffectHandler, Assembly-CSharp
+        m_MethodName: AcceptNewEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &651359055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,6 +1226,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1448593551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1448593553}
+  - component: {fileID: 1448593552}
+  m_Layer: 0
+  m_Name: Item Effect Handling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1448593552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448593551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbce949dcc1d1af4dad4f8bdfff737d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectList: []
+--- !u!4 &1448593553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448593551}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2738869303576906701}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1707683674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1701,17 +1758,21 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6382347267370230120, guid: ecec3d8c6c9bc604bbf9a7df815702f4, type: 3}
+      propertyPath: rules
+      value: 
+      objectReference: {fileID: 11400000, guid: f57d5a4b691bba44fb56bf43778e765d, type: 2}
     - target: {fileID: 7205278002932314959, guid: ecec3d8c6c9bc604bbf9a7df815702f4, type: 3}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7205278002932314959, guid: ecec3d8c6c9bc604bbf9a7df815702f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.83
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7205278002932314959, guid: ecec3d8c6c9bc604bbf9a7df815702f4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.80283403
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7205278002932314959, guid: ecec3d8c6c9bc604bbf9a7df815702f4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1751,6 +1812,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7205278002932314959, guid: ecec3d8c6c9bc604bbf9a7df815702f4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1727266244}
+    - targetCorrespondingSourceObject: {fileID: 7205278002932314959, guid: ecec3d8c6c9bc604bbf9a7df815702f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1448593553}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecec3d8c6c9bc604bbf9a7df815702f4, type: 3}
 --- !u!4 &2738869303576906701 stripped
