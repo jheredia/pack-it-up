@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using PackItUp.Controllers;
 using PackItUp.Managers;
+using PackItUp.MapGenerator;
 using PackItUp.MockSystems;
 
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,99 +18,82 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnGamePause;
     public event EventHandler OnGameResume;
 
-    [SerializeField] GameStateManager gameStateManagerPrefab;
+    const string MAIN_MENU_SCENE = "MainMenu";
+
     [SerializeField] MockTimer _timer;
     [SerializeField] MockInventory _inventory;
 
-    private List<TopDownCharacterController> _players;
-    private List<MockLevel> _levels = new();
-    private MockLevel _currentLevel, _lastLevel;
-    private GameStateManager _gameStateManager;
+    [SerializeField]
+    private bool _debugMode = false;
+    [SerializeField] string _debugScene;
+
+    private TopDownCharacterController[] _players;
+    [SerializeField]
+    private List<string> _levels;
+
+    [SerializeField]
+    private int _startingLevelIndex;
+    private string _currentLevel;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) {
+        if (Instance != null && Instance != this)
+        {
             Debug.LogError($"There's more than one GameManager in the scene! {transform} - {Instance}");
             Destroy(gameObject);
             return;
         }
-        
         Instance = this;
-        // DontDestroyOnLoad(gameObject);
-        _currentLevel = FindObjectOfType<MockLevel>();
-        
-        _gameStateManager = Instantiate(gameStateManagerPrefab, transform);
-        
-        // _levels = LevelManager.Instance.GenerateLevels();
-        //_currentLevel = _levels.First();
-        //TODO If levels are really going to be MonoBehaviours, then they should be "Instantiated" ... The alternative is treat them as "generated data" and not GameObjects
-        
+
+        DontDestroyOnLoad(gameObject);
 
 
+
+        _currentLevel = _levels[_startingLevelIndex];
+
+        _players = FindObjectsOfType<TopDownCharacterController>();
         // Create player controllers, set up timer, etc
     }
 
-    private void OnEnable()
-    {
-        _gameStateManager.OnLevelFailed += DrawMenu;
-        _gameStateManager.OnLevelSuccess += DrawShop;
-    }
 
-    private void OnDisable()
-    {
-        _gameStateManager.OnLevelFailed -= DrawMenu;
-        _gameStateManager.OnLevelSuccess -= DrawShop;
-    }
-
-    private void Start()
-    {
-        StartGame();
-    }
-
-    public MockLevel GetLevel() => _currentLevel;
+    public string GetLevel() => _currentLevel;
 
     public MockInventory GetInventory() => _inventory;
 
     public MockTimer GetTimer() => _timer;
 
-    public List<TopDownCharacterController> GetPlayers() => _players;
+    public TopDownCharacterController[] GetPlayers() => _players;
 
-    public GameStateManager GetGameStateManager() => _gameStateManager;
 
-    void StartGame()
+    public void StartGame()
     {
-        OnGameStart?.Invoke(this, EventArgs.Empty);
+        if (_debugMode) SceneManager.LoadScene(_debugScene);
+        else SceneManager.LoadScene(_currentLevel);
     }
 
     void NextLevel()
     {
-        _lastLevel = _currentLevel;
         _currentLevel = _levels.First();
     }
 
-    void AdvanceLevelAndStart()
+    public void AdvanceLevelAndStart()
     {
         NextLevel();
         StartGame();
     }
 
-
-    void ExitGame()
+    void LoadMenu(object sender, EventArgs e)
     {
-        // Close game
+        SceneManager.LoadScene(MAIN_MENU_SCENE);
+        Destroy(this);
     }
 
-    void DrawMenu(object sender, EventArgs e)
-    {
-        // Draw menu
-    }
-
-    void DrawShop(object sender, EventArgs e)
+    public void DrawShop(object sender, EventArgs e)
     {
         // Draw shop
     }
 
-    void DrawPauseMenu(object sender, EventArgs e)
+    public void DrawPauseMenu(object sender, EventArgs e)
     {
         OnGamePause?.Invoke(this, EventArgs.Empty);
     }

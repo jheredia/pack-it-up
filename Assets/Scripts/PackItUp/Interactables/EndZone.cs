@@ -47,7 +47,7 @@ namespace PackItUp.Interactables
             // Adjust light radius to match greatest dimension length of zone
             _light.pointLightOuterRadius *= Mathf.Max(size.x, size.y);
 
-            _gameStateManager = GameManager.Instance.GetGameStateManager();
+            _gameStateManager = FindObjectOfType<GameStateManager>();
 
             // Track players in end zone's box collider
             contactFilter = new ContactFilter2D();
@@ -94,7 +94,7 @@ namespace PackItUp.Interactables
             if (checkContacts && _bc.enabled)
             {
                 int results = _bc.OverlapCollider(contactFilter, zoneColliders);
-                if (results <= 0) 
+                if (results <= 0)
                 {
                     // The end zone is empty, and the exit condition is not met
                     Debug.Log("End Zone Empty");

@@ -8,12 +8,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Obstacle
+  - Exit
+  - Pickups / Collectables
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Characters
+    uniqueID: 3396745383
+    locked: 0
+  - name: Effects
+    uniqueID: 3114367221
+    locked: 0
+  - name: UI
+    uniqueID: 3320277675
     locked: 0

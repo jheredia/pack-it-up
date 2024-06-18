@@ -14,6 +14,8 @@ public class PickupData
     public bool isStackItem = false;
     public int stackNumber = 0;
 
+    public SO_ItemEffect itemEffect;
+
     #region Data Cloning
     public PickupData CloneData(PickupData data)
     {

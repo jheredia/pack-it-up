@@ -11,7 +11,7 @@ public class MockEndZone : MonoBehaviour
 
     private void Awake()
     {
-        _gameStateManager = GameManager.Instance.GetGameStateManager();
+        _gameStateManager = FindObjectOfType<GameStateManager>();
     }
 
     private void OnEnable()

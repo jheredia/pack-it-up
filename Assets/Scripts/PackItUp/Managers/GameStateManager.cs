@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using PackItUp.Controllers;
 using PackItUp.Interactables;
+using PackItUp.MapGenerator;
 using PackItUp.MockSystems;
 using UnityEngine;
 
@@ -37,7 +38,7 @@ namespace PackItUp.Managers
 
 
         // We need to know how many players are present in the game so we can enable/disable its movement between levels
-        private List<TopDownCharacterController> _players;
+        private TopDownCharacterController[] _players;
 
         // A single inventory will be present in the game, this is managed by the game manager 
         //and we should listen to the event the inventory emits when all key items are collected
@@ -47,7 +48,7 @@ namespace PackItUp.Managers
         private MockTimer _timer;
 
         // The current level, this will live in the game manager, the game state manager is agnostic of which level is the player on
-        private MockLevel _currentLevel;
+        private Level _currentLevel;
 
         // In each level, we'll have an end zone, this will be activate once the objective is completed allowing the player 
         // to end the game in a success state
@@ -59,13 +60,13 @@ namespace PackItUp.Managers
             _timer = _gameManager.GetTimer();
             _inventory = _gameManager.GetInventory();
             _players = _gameManager.GetPlayers();
-            _currentLevel = _gameManager.GetLevel();
-            _endZones = _currentLevel.GetEndZones();
+            _endZones = FindObjectsOfType<EndZone>();
             _exitCondition = false;
             _winCondition = false;
         }
 
-        private void OnEnable() {
+        private void OnEnable()
+        {
             _gameManager.OnGameStart += StartGame;
             _inventory.OnKeyItemsCollected += CompleteObjective;
             _timer.OnTimerRunOut += EndGameFailedState;
@@ -74,7 +75,8 @@ namespace PackItUp.Managers
             EndZone.OnEndZoneEmpty += DeactivateExitCondition;
         }
 
-        private void OnDisable() {
+        private void OnDisable()
+        {
             _gameManager.OnGameStart -= StartGame;
             _inventory.OnKeyItemsCollected -= CompleteObjective;
             _timer.OnTimerRunOut -= EndGameFailedState;
@@ -83,7 +85,8 @@ namespace PackItUp.Managers
             EndZone.OnEndZoneEmpty -= DeactivateExitCondition;
         }
 
-        private void StartGame(object sender, EventArgs e) {
+        private void StartGame(object sender, EventArgs e)
+        {
             _winCondition = false;
             OnLevelStart?.Invoke(this, EventArgs.Empty);
         }
@@ -113,12 +116,12 @@ namespace PackItUp.Managers
         //JUST ADDED THIS TO TEST THE VISUAL CUE - AND COULD BE USEFUL IF THE PLAYER NOTICE HES MISSING SOMETHING AND GOES TO FETCH IT
         private void CancelEndGameCountdown(object sender, GameObject playerObject)
         {
-            OnEndGameCountdownCancel?.Invoke(this, EventArgs.Empty);
-            // var objectName = playerObject.transform.parent ? playerObject.transform.parent.name : playerObject.name;
-            // //NOTE... right now this is only called by the end zone, that's why Im casting the sender to EndZone
-            // Debug.Log($"Player {objectName} left Zone {((EndZone)sender).name}");
-            // //JUST TO TEST THE VISUAL CUE
+            var objectName = playerObject.transform.parent ? playerObject.transform.parent.name : playerObject.name;
+            //NOTE... right now this is only called by the end zone, that's why Im casting the sender to EndZone
+            Debug.Log($"Player {objectName} left Zone {((EndZone)sender).name}");
+            //JUST TO TEST THE VISUAL CUE
             // EndZone.ActivateCue(false);
+            OnEndGameCountdownCancel?.Invoke(this, EventArgs.Empty);
         }
 
         private void DeactivateExitCondition(object sender, EventArgs e)
