@@ -61,7 +61,7 @@ namespace PackItUp.Shop
 
         public void ReduceCoinTotal(object sender, ShopOption option)
         {
-            _coinTotal -= option.GetCost();
+            _coinTotal -= option.ObjectValue;
         }
 
         // Return current coin amount for comparing prices of objects
