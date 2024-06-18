@@ -98,7 +98,7 @@ Transform:
   - {fileID: 8107369121295333451}
   - {fileID: 6888720397156313506}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3275046789339456715
 GameObject:
@@ -431,5 +431,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff56a5d63fc4f6da534a80e53df1d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerConfig: {fileID: 0}
-  movementConfig: {fileID: 0}
+  playerConfig: {fileID: 11400000, guid: 6e7b3d1513f0644799d6b6ad45c9d19b, type: 2}
+  movementConfig: {fileID: 11400000, guid: acf274f61bf6f4ecca484261dffdb550, type: 2}
