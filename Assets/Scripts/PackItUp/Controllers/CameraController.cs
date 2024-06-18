@@ -1,3 +1,4 @@
+using PackItUp.Scriptable;
 using UnityEngine;
 
 namespace PackItUp.Controllers {
