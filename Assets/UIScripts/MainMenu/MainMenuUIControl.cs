@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 public class MainMenuUIControl : MonoBehaviour
 {
-    [SerializeField]
-    private bool _debugMode = false;
     public const string GAMEPLAY_SCENE = "GameLoop";
     public const string CREDITS_SCENE = "Credits";
-    private const string DEBUG_SCENE = "Playground";
 
     public Image mainCharacter;
     public List<Sprite> mainMenuCharacters;
 
+    private GameManager _gameManager;
+
     private void Awake()
     {
         LoadRandomCharacter();
+        _gameManager = GameManager.Instance;
     }
 
     private void LoadRandomCharacter()
@@ -34,8 +34,7 @@ public class MainMenuUIControl : MonoBehaviour
 
     public void LoadGame()
     {
-        if (_debugMode) SceneManager.LoadScene(DEBUG_SCENE);
-        else SceneManager.LoadScene(GAMEPLAY_SCENE);
+        _gameManager.StartGame();
     }
 
 

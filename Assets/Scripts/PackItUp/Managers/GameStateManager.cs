@@ -60,7 +60,6 @@ namespace PackItUp.Managers
             _timer = _gameManager.GetTimer();
             _inventory = _gameManager.GetInventory();
             _players = _gameManager.GetPlayers();
-            _currentLevel = _gameManager.GetLevel();
             _endZones = _currentLevel.GetEndZones();
             _exitCondition = false;
             _winCondition = false;

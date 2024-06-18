@@ -20,23 +20,20 @@ public class GameManager : MonoBehaviour
 
     const string MAIN_MENU_SCENE = "MainMenu";
 
-    [SerializeField] GameStateManager gameStateManagerPrefab;
     [SerializeField] MockTimer _timer;
     [SerializeField] MockInventory _inventory;
 
+    [SerializeField]
+    private bool _debugMode = false;
+    [SerializeField] string _debugScene;
+
     private TopDownCharacterController[] _players;
-    private List<Level> _levels = new();
     [SerializeField]
-    private Level _currentLevel;
-    private GameStateManager _gameStateManager;
+    private List<string> _levels;
 
-
-    // Luciano
     [SerializeField]
-    private int _levelIndex;
-    [SerializeField]
-    private List<AbstractMapGenerator> _levelGenerators;
-
+    private int _startingLevelIndex;
+    private string _currentLevel;
 
     private void Awake()
     {
@@ -48,35 +45,18 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
 
-        // Maybe? DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
 
 
-        _gameStateManager = Instantiate(gameStateManagerPrefab, transform);
 
-        _currentLevel.Generator = _levelGenerators[_levelIndex];
+        _currentLevel = _levels[_startingLevelIndex];
 
         _players = FindObjectsOfType<TopDownCharacterController>();
         // Create player controllers, set up timer, etc
     }
 
-    private void OnEnable()
-    {
-        _gameStateManager.OnLevelFailed += DrawPauseMenu;
-        _gameStateManager.OnLevelSuccess += DrawShop;
-    }
 
-    private void OnDisable()
-    {
-        _gameStateManager.OnLevelFailed -= DrawPauseMenu;
-        _gameStateManager.OnLevelSuccess -= DrawShop;
-    }
-
-    private void Start()
-    {
-        StartGame();
-    }
-
-    public Level GetLevel() => _currentLevel;
+    public string GetLevel() => _currentLevel;
 
     public MockInventory GetInventory() => _inventory;
 
@@ -84,11 +64,11 @@ public class GameManager : MonoBehaviour
 
     public TopDownCharacterController[] GetPlayers() => _players;
 
-    public GameStateManager GetGameStateManager() => _gameStateManager;
 
-    void StartGame()
+    public void StartGame()
     {
-        OnGameStart?.Invoke(this, EventArgs.Empty);
+        if (_debugMode) SceneManager.LoadScene(_debugScene);
+        else SceneManager.LoadScene(_currentLevel);
     }
 
     void NextLevel()
@@ -96,7 +76,7 @@ public class GameManager : MonoBehaviour
         _currentLevel = _levels.First();
     }
 
-    void AdvanceLevelAndStart()
+    public void AdvanceLevelAndStart()
     {
         NextLevel();
         StartGame();
@@ -105,14 +85,15 @@ public class GameManager : MonoBehaviour
     void LoadMenu(object sender, EventArgs e)
     {
         SceneManager.LoadScene(MAIN_MENU_SCENE);
+        Destroy(this);
     }
 
-    void DrawShop(object sender, EventArgs e)
+    public void DrawShop(object sender, EventArgs e)
     {
         // Draw shop
     }
 
-    void DrawPauseMenu(object sender, EventArgs e)
+    public void DrawPauseMenu(object sender, EventArgs e)
     {
         OnGamePause?.Invoke(this, EventArgs.Empty);
     }
