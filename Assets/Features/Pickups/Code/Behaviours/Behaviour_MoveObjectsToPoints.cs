@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Behaviour_MoveObjectsToPoints : MonoBehaviour
@@ -15,10 +16,13 @@ public class Behaviour_MoveObjectsToPoints : MonoBehaviour
     {
         if (isRandomMove)
         {
+            List<int> availableIndices = Enumerable.Range(0, movePoints.Length).ToList();
             foreach (GameObject obj in objectsToMove)
             {
-                int randomIndex = Random.Range(0, movePoints.Length);
-                obj.transform.position = movePoints[randomIndex].position;
+                int randomIndex = Random.Range(0, availableIndices.Count);
+                int movePointIndex = availableIndices[randomIndex];
+                obj.transform.position = movePoints[movePointIndex].position;
+                availableIndices.RemoveAt(randomIndex);
                 yield return new WaitForSeconds(delayBetweenMoves);
             }
         }
