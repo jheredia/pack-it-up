@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Laterals
+    uniqueID: 1224933647
+    locked: 0
+  - name: Foreground
+    uniqueID: 397795185
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -49,4 +55,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3320277675
+    locked: 0
+  - name: Background
+    uniqueID: 2267995263
     locked: 0
