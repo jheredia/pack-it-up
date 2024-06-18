@@ -56,9 +56,17 @@ public class Component_CharacterItemEffectHandler : MonoBehaviour
         if (newEffect.affectsAllCharacters || pair.character == this.gameObject) effectList.Add(newEffect);
     }
 
+    public float GetModifiedTopSpeed(float unmodifiedTopSpeed)
+    {
+        float multiplier = 1 + (currentVelocityMod / 100f);
+        return (unmodifiedTopSpeed * multiplier);
+    }
+
+    /* obsoleted due to changes to use forces instead of setting velocity directly
     public Vector2 GetModifiedVelocity(Vector2 unModifiedVelocity)
     {
         float multiplier = 1 + (currentVelocityMod / 100f);
         return new Vector2(unModifiedVelocity.x * multiplier, unModifiedVelocity.y * multiplier);
     }
+    */
 }
