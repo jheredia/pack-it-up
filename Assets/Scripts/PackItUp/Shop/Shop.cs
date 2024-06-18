@@ -11,9 +11,8 @@ namespace PackItUp.Shop
     {
         private GameManager _gameManager;
         private MockInventory _inventory;
-        //private List<GameObject> _itemsForSale;
         
-        [SerializeField] private Canvas _shopUI;
+        [SerializeField] private GameObject _shopUI;
         [SerializeField] private ShopUIControl _shopController;
 
         public event EventHandler<int> OnShopExit;
@@ -49,8 +48,9 @@ namespace PackItUp.Shop
 
         public void OpenUIShop(object sender, EventArgs e)
         {
+            Debug.Log("Opening Shop");
             RestockCoins();
-            _shopUI.enabled = true;
+            _shopUI.SetActive(true);
         }
         
 
@@ -69,5 +69,11 @@ namespace PackItUp.Shop
         {
             return _coinTotal;
         }
+
+
+        /*public void CloseShopUI(object sender, int _)
+        {
+            _shopUI.SetActive(false);
+        }*/
     }
 }

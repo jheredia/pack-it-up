@@ -37,6 +37,4 @@ public class MockInventory : MonoBehaviour
     {
         return _coinTotal;
     }
-
-    //public int 
 }

@@ -814,7 +814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timer: {fileID: 954171236}
   _inventory: {fileID: 954171233}
-  _shop: {fileID: 0}
+  _shop: {fileID: 954171237}
   _debugMode: 0
   _debugScene: 
   _levels: []
@@ -2265,6 +2265,7 @@ GameObject:
   - component: {fileID: 954171233}
   - component: {fileID: 954171236}
   - component: {fileID: 954171234}
+  - component: {fileID: 954171237}
   m_Layer: 0
   m_Name: Mocks
   m_TagString: Untagged
@@ -2324,6 +2325,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1c9140e6fd2c149a4f4b72aaaf61fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &954171237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954171232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e0f6d79b2380c43b5c600b4acfa04c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shopUI: {fileID: 1941105480}
+  _shopController: {fileID: 1880064245}
 --- !u!1 &967303999
 GameObject:
   m_ObjectHideFlags: 0
@@ -11401,6 +11416,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1941105480 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2098743334300856494, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
+  m_PrefabInstance: {fileID: 2351185182029947718}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1944198166
 GameObject:
   m_ObjectHideFlags: 0
@@ -11959,9 +11979,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 671841383071190577, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
+    - target: {fileID: 1829039694572711336, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
       objectReference: {fileID: 0}
     - target: {fileID: 2098743334300856494, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
       propertyPath: m_Name
@@ -11972,13 +11992,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5312963599196019734, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 64
+      propertyPath: m_SizeDelta.x
+      value: -622.6165
       objectReference: {fileID: 0}
-    - target: {fileID: 5367513224056439794, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
-      propertyPath: _shopController
-      value: 
-      objectReference: {fileID: 1880064245}
+    - target: {fileID: 5312963599196019734, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -268.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5312963599196019734, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -226.21637
+      objectReference: {fileID: 0}
+    - target: {fileID: 5312963599196019734, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 65.773
+      objectReference: {fileID: 0}
     - target: {fileID: 8869208561563983063, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
       propertyPath: m_Pivot.x
       value: 0

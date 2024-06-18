@@ -72,7 +72,7 @@ namespace PackItUp.Shop
             // Send recent coin total after purchases
             OnClearOptions?.Invoke(this, _tempCoinTotal);
 
-            enabled = false;
+            this.gameObject.SetActive(false);
         }
 
         public void UpdateTempCoinTotal(object sender, ShopOption option)

@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
         if (_activateShop)
         {
             OnShopOpen?.Invoke(this, null);
+            _activateShop = false;
         }
     }
 }
