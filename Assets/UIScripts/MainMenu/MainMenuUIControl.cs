@@ -5,21 +5,24 @@ using UnityEngine.UI;
 
 public class MainMenuUIControl : MonoBehaviour
 {
-    public const string GAMEPLAY_SCENE = "gamePlay";
+    public const string GAMEPLAY_SCENE = "GameLoop";
     public const string CREDITS_SCENE = "Credits";
 
     public Image mainCharacter;
     public List<Sprite> mainMenuCharacters;
 
+    private GameManager _gameManager;
+
     private void Awake()
     {
-       LoadRandomCharacter(); 
+        LoadRandomCharacter();
+        _gameManager = GameManager.Instance;
     }
 
     private void LoadRandomCharacter()
     {
-        int pos = (int)Random.Range(0,2);
-        if(mainMenuCharacters.Count > 0)
+        int pos = Random.Range(0, 2);
+        if (mainMenuCharacters.Count > 0)
         {
             mainCharacter.sprite = mainMenuCharacters[pos];
         }
@@ -31,7 +34,7 @@ public class MainMenuUIControl : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene(GAMEPLAY_SCENE);
+        _gameManager.StartGame();
     }
 
 
