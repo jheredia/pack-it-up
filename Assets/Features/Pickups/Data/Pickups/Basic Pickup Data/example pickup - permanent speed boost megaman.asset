@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0cf67dcf6860e8448ee3ad646af2d54, type: 3}
-  m_Name: Test Pickup 01 - Sushi
+  m_Name: example pickup - permanent speed boost megaman
   m_EditorClassIdentifier: 
   data:
-    displayName: test sushi
-    bigSprite: {fileID: 21300000, guid: 7a271393fbe498c499cd8a891d6e852b, type: 3}
+    displayName: Megaman
+    bigSprite: {fileID: 21300000, guid: d10688ac6e38d1240b21aba3e86da69f, type: 3}
     isKeyItem: 0
     isInventoryItem: 0
     isStackItem: 0
     stackNumber: 0
-    itemEffect: {fileID: 0}
+    itemEffect: {fileID: 11400000, guid: d254868abc57ee5499155764c71a70fd, type: 2}

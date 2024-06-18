@@ -6,6 +6,7 @@ public class Component_CharacterItemEffectHandler : MonoBehaviour
 {
     public List<ItemEffectData> effectList;
     private bool isOn = false;
+    public float currentVelocityMod = 0f;
 
     private void Start()
     {
@@ -18,6 +19,7 @@ public class Component_CharacterItemEffectHandler : MonoBehaviour
         while (isOn)
         {
             DecrementAllEffects();
+            CalculateVelocityMods();
             ClearExpiredEffects();
             yield return new WaitForSeconds(1);
         }
@@ -26,6 +28,16 @@ public class Component_CharacterItemEffectHandler : MonoBehaviour
     private void DecrementAllEffects()
     {
         foreach (ItemEffectData effect in effectList) { effect.DecrementCountdown(); }
+    }
+
+    private void CalculateVelocityMods()
+    {
+        float total = 0f;
+        foreach (ItemEffectData effect in effectList)
+        {
+            if (!effect.isVelocityMod) break;
+            else total += effect.velocityMod;
+        }
     }
 
     private void ClearExpiredEffects()
@@ -42,5 +54,11 @@ public class Component_CharacterItemEffectHandler : MonoBehaviour
         if (newEffect == null) return;
         effectList.Add(newEffect);
         if (newEffect.affectsAllCharacters || pair.character == this.gameObject) effectList.Add(newEffect);
+    }
+
+    public Vector2 GetModifiedVelocity(Vector2 unModifiedVelocity)
+    {
+        float multiplier = 1 + (currentVelocityMod / 100f);
+        return new Vector2(unModifiedVelocity.x * multiplier, unModifiedVelocity.y * multiplier);
     }
 }

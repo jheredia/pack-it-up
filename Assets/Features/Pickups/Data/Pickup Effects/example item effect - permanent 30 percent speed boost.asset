@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cab7c0015065fb4ebe641e4117d2b3d, type: 3}
-  m_Name: test item effect
+  m_Name: example item effect - permanent 30 percent speed boost
   m_EditorClassIdentifier: 
   effect:
     duration: 0
-    isPermanent: 0
+    isPermanent: 1
     affectsAllCharacters: 0
-    isVelocityMod: 0
-    velocityMod: 0
+    isVelocityMod: 1
+    velocityMod: 30

@@ -22,6 +22,8 @@ public class ItemEffectData
         countdown = data.duration;
         isPermanent = data.isPermanent;
         affectsAllCharacters = data.affectsAllCharacters;
+        isVelocityMod = data.isVelocityMod;
+        velocityMod = data.velocityMod;
     }
     #endregion
 
