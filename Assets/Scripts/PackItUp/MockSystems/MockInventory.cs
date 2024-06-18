@@ -7,7 +7,21 @@ public class MockInventory : MonoBehaviour
 {
     public EventHandler OnKeyItemsCollected;
     public EventHandler<List <GameObject>> OnItemsRequest;
-    private int _coinTotal;
+    private int _coinTotal = 20;
+
+    public void AcceptPickupData(CharacterPickupPair pair)
+    {
+        Debug.Log("test");
+        StopAllCoroutines();
+        //image.sprite = pair.pickupData.bigSprite;
+        StartCoroutine(StopDisplayingSprite());
+    }
+
+    public IEnumerator StopDisplayingSprite()
+    {
+        yield return new WaitForSeconds(1);
+        //image.sprite = null;
+    }
 
     private void OnEnable()
     {
@@ -28,6 +42,7 @@ public class MockInventory : MonoBehaviour
     public List<GameObject> GetMissingItems()
     {
         List<GameObject> _missingItems = new List<GameObject>();
+
 
         return _missingItems;
     }

@@ -27,8 +27,11 @@ namespace PackItUp.Shop
 
         private void OnEnable()
         {
-            //RestockShop(List < GameObject > itemsMissing)
+            // Restock shop after level completion and get updated coin amount for UI
             _itemsForSale = _shop.GetMissingItems();
+            _tempCoinTotal = _shop.ReturnCoinTotal();
+            _coinText.text = _tempCoinTotal.ToString();
+
             _shopController.OnContinue += ClearOptions;
             _shopController.OnPurchase += UpdateTempCoinTotal;
         }
@@ -72,7 +75,7 @@ namespace PackItUp.Shop
             // Send recent coin total after purchases
             OnClearOptions?.Invoke(this, _tempCoinTotal);
 
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         public void UpdateTempCoinTotal(object sender, ShopOption option)

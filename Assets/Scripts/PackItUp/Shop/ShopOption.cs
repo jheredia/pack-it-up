@@ -51,7 +51,7 @@ namespace PackItUp.Shop
         }
 
         // Identifies object as item, or if not, a souvenir
-        private bool _isItem = false;
+        public bool _isItem = false;
         
         public bool GetItemType()
         {
