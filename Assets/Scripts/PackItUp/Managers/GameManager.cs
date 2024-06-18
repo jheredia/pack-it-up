@@ -9,6 +9,7 @@ using PackItUp.MockSystems;
 
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,14 +18,16 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnGamePause;
     public event EventHandler OnGameResume;
 
+    const string MAIN_MENU_SCENE = "MainMenu";
+
     [SerializeField] GameStateManager gameStateManagerPrefab;
     [SerializeField] MockTimer _timer;
     [SerializeField] MockInventory _inventory;
 
-    private List<TopDownCharacterController> _players;
+    private TopDownCharacterController[] _players;
     private List<Level> _levels = new();
     [SerializeField]
-    private Level _currentLevel, _lastLevel;
+    private Level _currentLevel;
     private GameStateManager _gameStateManager;
 
 
@@ -34,47 +37,37 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<AbstractMapGenerator> _levelGenerators;
 
-    [field: SerializeField]
-    public UnityEvent OnLoadLevelStart { get; set; }
-
-    [field: SerializeField]
-    public UnityEvent<float> OnLoadLevelProgress { get; set; }
-
-    [field: SerializeField]
-    public UnityEvent OnLoadLevelFinish { get; set; }
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) {
+        if (Instance != null && Instance != this)
+        {
             Debug.LogError($"There's more than one GameManager in the scene! {transform} - {Instance}");
             Destroy(gameObject);
             return;
         }
-        
         Instance = this;
-        // DontDestroyOnLoad(gameObject);
-        //_currentLevel = FindObjectOfType<MockLevel>();
-        
+
+        // Maybe? DontDestroyOnLoad(gameObject);
+
+
         _gameStateManager = Instantiate(gameStateManagerPrefab, transform);
 
-        // _levels = LevelManager.Instance.GenerateLevels();
-        //_currentLevel = _levels.First();
-        //TODO If levels are really going to be MonoBehaviours, then they should be "Instantiated" ... The alternative is treat them as "generated data" and not GameObjects
         _currentLevel.Generator = _levelGenerators[_levelIndex];
 
-
+        _players = FindObjectsOfType<TopDownCharacterController>();
         // Create player controllers, set up timer, etc
     }
 
     private void OnEnable()
     {
-        _gameStateManager.OnLevelFailed += DrawMenu;
+        _gameStateManager.OnLevelFailed += DrawPauseMenu;
         _gameStateManager.OnLevelSuccess += DrawShop;
     }
 
     private void OnDisable()
     {
-        _gameStateManager.OnLevelFailed -= DrawMenu;
+        _gameStateManager.OnLevelFailed -= DrawPauseMenu;
         _gameStateManager.OnLevelSuccess -= DrawShop;
     }
 
@@ -89,7 +82,7 @@ public class GameManager : MonoBehaviour
 
     public MockTimer GetTimer() => _timer;
 
-    public List<TopDownCharacterController> GetPlayers() => _players;
+    public TopDownCharacterController[] GetPlayers() => _players;
 
     public GameStateManager GetGameStateManager() => _gameStateManager;
 
@@ -100,7 +93,6 @@ public class GameManager : MonoBehaviour
 
     void NextLevel()
     {
-        _lastLevel = _currentLevel;
         _currentLevel = _levels.First();
     }
 
@@ -110,15 +102,9 @@ public class GameManager : MonoBehaviour
         StartGame();
     }
 
-
-    void ExitGame()
+    void LoadMenu(object sender, EventArgs e)
     {
-        // Close game
-    }
-
-    void DrawMenu(object sender, EventArgs e)
-    {
-        // Draw menu
+        SceneManager.LoadScene(MAIN_MENU_SCENE);
     }
 
     void DrawShop(object sender, EventArgs e)
