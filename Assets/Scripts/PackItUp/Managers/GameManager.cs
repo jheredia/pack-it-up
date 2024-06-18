@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] MockTimer _timer;
     [SerializeField] MockInventory _inventory;
-    [SerializeField] ShopUI _shop;
+    [SerializeField] Shop _shop;
 
     [SerializeField]
     private bool _debugMode = false;
@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int _startingLevelIndex;
     private string _currentLevel;
+
+    // Ends level to test shop UI
+    public bool _activateShop;
 
     private void Awake()
     {
@@ -65,7 +68,7 @@ public class GameManager : MonoBehaviour
 
     public MockTimer GetTimer() => _timer;
 
-    public ShopUI GetShop() => _shop;
+    public Shop GetShop() => _shop;
 
     public TopDownCharacterController[] GetPlayers() => _players;
 
@@ -104,5 +107,13 @@ public class GameManager : MonoBehaviour
     public void DrawPauseMenu(object sender, EventArgs e)
     {
         OnGamePause?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Update()
+    {
+        if (_activateShop)
+        {
+            OnShopOpen?.Invoke(this, null);
+        }
     }
 }

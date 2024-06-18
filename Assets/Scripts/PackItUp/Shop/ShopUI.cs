@@ -4,60 +4,52 @@ using UnityEngine;
 using PackItUp.Managers;
 using Unity.VisualScripting;
 using UnityEngine.Rendering.Universal;
+using TMPro;
 
 namespace PackItUp.Shop
 {
     public class ShopUI : MonoBehaviour
     {
-        private GameManager _gameManager;
-        private MockInventory _inventory;
-        private List<GameObject> _itemsForSale;
-        private List<GameObject> _souvenirsForSale;
-        private List<ShopOption> _shopOptions;
         [SerializeField] private ShopUIControl _shopController;
+        private Shop _shop;
+        [SerializeField] private List<ShopOption> _shopOptions;
+        [SerializeField] private TMP_Text _coinText;
+        private List<GameObject> _souvenirsForSale;
+        private List<GameObject> _itemsForSale;
 
-        public event EventHandler<int> OnShopExit;
+        public event EventHandler<int> OnClearOptions;
+        private int _tempCoinTotal;
 
-        private int _coinTotal;
         private void Awake()
         {
-            _gameManager = GameManager.Instance;
-            _inventory = _gameManager.GetInventory();
+            _shop = GameManager.Instance.GetShop();
         }
 
         private void OnEnable()
         {
-            _gameManager.OnShopOpen += OpenShop;
-            _inventory.OnItemsRequest += RestockShop;
-            _shopController.OnPurchase += ReduceCoinTotal;
+            //RestockShop(List < GameObject > itemsMissing)
+            _itemsForSale = _shop.GetMissingItems();
+            _shopController.OnContinue += ClearOptions;
+            _shopController.OnPurchase += UpdateTempCoinTotal;
         }
 
         private void OnDisable()
         {
-            _gameManager.OnShopOpen -= OpenShop;
-            _inventory.OnItemsRequest -= RestockShop;
-            _shopController.OnPurchase -= ReduceCoinTotal;
+            _shopController.OnContinue -= ClearOptions;
+            _shopController.OnPurchase += UpdateTempCoinTotal;
         }
 
-        public void OpenShop(object sender, EventArgs e)
-        {
-            enabled = true;
-            // TODO: disable player input
-        }
-
-        public void RestockShop(object sender, List<GameObject> itemsMissing)
+        public void RestockShop(List<GameObject> itemsMissing)
         {
             // Get buff/debuff items that were missed in the previous stage
-            _itemsForSale = itemsMissing;
-
             foreach (ShopOption _option in _shopOptions)
             {
                 // Fill items row with missed items
-                if (_option.GetItemType() && _itemsForSale.Count > 0)
+                if (_option.GetItemType() && itemsMissing.Count > 0)
                 {
                     _option.enabled = true;
-                    _option.AddObject(_itemsForSale[0]);
-                    _itemsForSale.RemoveAt(0);
+                    _option.AddObject(itemsMissing[0]);
+                    itemsMissing.RemoveAt(0);
                 }
                 // Fill souvenirs row with sounevirs to buy
                 else if (_souvenirsForSale.Count > 0)
@@ -71,20 +63,22 @@ namespace PackItUp.Shop
 
         public void ClearOptions(object sender, EventArgs e)
         {
-            // TODO: enable player input
             // Disable all shop options
             foreach (ShopOption _option in _shopOptions)
             {
                 _option.enabled = false;
             }
-            enabled = false;
 
-            OnShopExit?.Invoke(this, _coinTotal);
+            // Send recent coin total after purchases
+            OnClearOptions?.Invoke(this, _tempCoinTotal);
+
+            enabled = false;
         }
 
-        public void ReduceCoinTotal(object sender, int value)
+        public void UpdateTempCoinTotal(object sender, ShopOption option)
         {
-            _coinTotal -= value;
+            _tempCoinTotal -= option.ObjectValue;
+            _coinText.text = _tempCoinTotal.ToString();
         }
     }
 }
