@@ -38,7 +38,7 @@ namespace PackItUp.Managers
 
 
         // We need to know how many players are present in the game so we can enable/disable its movement between levels
-        private List<TopDownCharacterController> _players;
+        private TopDownCharacterController[] _players;
 
         // A single inventory will be present in the game, this is managed by the game manager 
         //and we should listen to the event the inventory emits when all key items are collected
