@@ -6,6 +6,7 @@ using PackItUp.Controllers;
 using PackItUp.Managers;
 using PackItUp.MapGenerator;
 using PackItUp.MockSystems;
+using PackItUp.Shop;
 
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,10 +17,12 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnGameStart;
     public event EventHandler OnGamePause;
     public event EventHandler OnGameResume;
+    public event EventHandler OnShopOpen;
 
     [SerializeField] GameStateManager gameStateManagerPrefab;
     [SerializeField] MockTimer _timer;
     [SerializeField] MockInventory _inventory;
+    [SerializeField] ShopUI _shop;
 
     private List<TopDownCharacterController> _players;
     private List<Level> _levels = new();
@@ -89,6 +92,8 @@ public class GameManager : MonoBehaviour
 
     public MockTimer GetTimer() => _timer;
 
+    public ShopUI GetShop() => _shop;
+
     public List<TopDownCharacterController> GetPlayers() => _players;
 
     public GameStateManager GetGameStateManager() => _gameStateManager;
@@ -106,6 +111,7 @@ public class GameManager : MonoBehaviour
 
     void AdvanceLevelAndStart()
     {
+        //_shop.enabled = false;
         NextLevel();
         StartGame();
     }
@@ -124,6 +130,8 @@ public class GameManager : MonoBehaviour
     void DrawShop(object sender, EventArgs e)
     {
         // Draw shop
+        OnShopOpen?.Invoke(this, null);
+        //_shop.enabled = true;
     }
 
     void DrawPauseMenu(object sender, EventArgs e)
