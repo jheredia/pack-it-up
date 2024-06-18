@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b1f2c325314d63aee4411de204504d, type: 3}
   m_Name: PlayerMovementConfig
   m_EditorClassIdentifier: 
-  topSpeed: 20
+  topSpeed: 10
   acceleration: 200
   turnRate: 0.95
   drag: 0.95

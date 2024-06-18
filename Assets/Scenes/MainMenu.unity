@@ -1671,7 +1671,8 @@ MonoBehaviour:
   _debugScene: Playground
   _levels:
   - FirstLevel
-  _startingLevelIndex: 0
+  - SecondLevel
+  _startingLevelIndex: 1
 --- !u!4 &1778988393
 Transform:
   m_ObjectHideFlags: 0
