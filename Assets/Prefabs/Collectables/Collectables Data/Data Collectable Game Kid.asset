@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0cf67dcf6860e8448ee3ad646af2d54, type: 3}
+  m_Name: Data Collectable Game Kid
+  m_EditorClassIdentifier: 
+  data:
+    displayName: Game Kid
+    bigSprite: {fileID: 1787946334, guid: c1031fd9e8050c64b9c8f5e197dad9b0, type: 3}
+    isKeyItem: 0
+    isInventoryItem: 0
+    isStackItem: 0
+    stackNumber: 0
+    itemEffect: {fileID: 0}
