@@ -50,6 +50,7 @@ public class Component_CharacterItemEffectHandler : MonoBehaviour
 
     public void AcceptNewEffect(CharacterPickupPair pair)
     {
+        if (pair.pickupData.itemEffect == null) return;
         ItemEffectData newEffect = new(pair.pickupData.itemEffect.effect);
         if (newEffect == null) return;
         effectList.Add(newEffect);
