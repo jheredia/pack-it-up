@@ -19,4 +19,4 @@ MonoBehaviour:
     isInventoryItem: 1
     isStackItem: 0
     stackNumber: 0
-    itemEffect: {fileID: 0}
+    itemEffect: {fileID: 11400000, guid: c54faf328a5d84341ac331745e4f9c18, type: 2}

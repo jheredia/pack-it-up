@@ -9,14 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b1f2c325314d63aee4411de204504d, type: 3}
-  m_Name: PlayerMovementConfig
+  m_Script: {fileID: 11500000, guid: 8cab7c0015065fb4ebe641e4117d2b3d, type: 3}
+  m_Name: Permanent 30 percent speed buff
   m_EditorClassIdentifier: 
-  topSpeed: 10
-  acceleration: 200
-  turnRate: 0.95
-  drag: 0.95
-  drift: 0.5
-  dashDuration: 0.5
-  dashMultiplier: 2.5
-  dashCooldown: 5
+  effect:
+    duration: 99
+    isPermanent: 1
+    affectsAllCharacters: 0
+    isVelocityMod: 1
+    velocityMod: 30

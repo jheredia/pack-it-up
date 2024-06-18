@@ -57,9 +57,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5803805533837193628}
     - target: {fileID: 3369589535283339927, guid: ab970b2cb7018cb4a8895cb79e3c464c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369589535283339927, guid: ab970b2cb7018cb4a8895cb79e3c464c, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369589535283339927, guid: ab970b2cb7018cb4a8895cb79e3c464c, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1726262740, guid: c1031fd9e8050c64b9c8f5e197dad9b0, type: 3}
+    - target: {fileID: 6351217490156104745, guid: ab970b2cb7018cb4a8895cb79e3c464c, type: 3}
+      propertyPath: dataWrapper
+      value: 
+      objectReference: {fileID: 11400000, guid: 4eed3a1c54729f44bb50550fc8029403, type: 2}
     - target: {fileID: 7670175186237174704, guid: ab970b2cb7018cb4a8895cb79e3c464c, type: 3}
       propertyPath: m_Name
       value: Collectable Kool Juice Variant
