@@ -146,8 +146,26 @@ namespace PackItUp.Controllers
             ResetAnimatorTriggers();
             if (_moveDirection.magnitude <= 0)
                 _animator.SetTrigger("Idle");
-            if (_moveDirection.x < 0) _animator.SetTrigger("RunningLeft");
-            if (_moveDirection.x > 0) _animator.SetTrigger("RunningRight");
+            if (_moveDirection.x < 0)
+            {
+                _rb.gameObject.transform.eulerAngles = new Vector3(
+                    _rb.gameObject.transform.eulerAngles.x,
+                    -180,
+                    _rb.gameObject.transform.eulerAngles.z
+                );
+                _animator.SetTrigger("RunningLeft");
+            }
+
+            if (_moveDirection.x > 0)
+            {
+                _rb.gameObject.transform.eulerAngles = new Vector3(
+                    _rb.gameObject.transform.eulerAngles.x,
+                    0,
+                    _rb.gameObject.transform.eulerAngles.z
+                );
+                _animator.SetTrigger("RunningRight");
+            }
+
             if (_moveDirection.y < 0) _animator.SetTrigger("RunningDown");
             if (_moveDirection.y > 0) _animator.SetTrigger("RunningUp");
         }
