@@ -1671,10 +1671,10 @@ MonoBehaviour:
   _debugMode: 0
   _debugScene: Playground
   _levels:
-  - FirstLevel 1
+  - FirstLevel
   - SecondLevel
   - ThirdLevel
-  _startingLevelIndex: 1
+  _startingLevelIndex: 0
   _activateShop: 0
 --- !u!4 &1778988393
 Transform:
