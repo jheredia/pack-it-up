@@ -8,7 +8,8 @@ public class WinGameHandler : MonoBehaviour
 {   
     private GameStateManager _gameStateManager;
     private ParticleSystem _myParticleSystem;
-    public AudioClip audioClip;
+    public AudioClip winFX;
+    public AudioClip winMusic;
     private bool _isEnding = false;
 
     private void Awake()
@@ -28,7 +29,7 @@ public class WinGameHandler : MonoBehaviour
         if (_isEnding) return;
         _isEnding = true;
         _myParticleSystem.Play();
-        GameManager.Instance.PlaySoundFX(audioClip);
+        GameManager.Instance.PlaySoundFX(winFX);
         StartCoroutine(DelayOrCoroutineProcess());
     }
 
@@ -41,6 +42,6 @@ public class WinGameHandler : MonoBehaviour
 
     private void EndWinProcess()
     {
-        GameManager.Instance.LoadCredits();
+        GameManager.Instance.LoadCredits(winMusic);
     }
 }

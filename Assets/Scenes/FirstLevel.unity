@@ -29542,7 +29542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 936a0e15b3f8aaa4a8c44c12d06a8433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 3ce11ecf3dc337446998c03274e43e91, type: 3}
+  winFX: {fileID: 8300000, guid: 3ce11ecf3dc337446998c03274e43e91, type: 3}
+  winMusic: {fileID: 8300000, guid: 893f9b82a5701b347b10832051bc111e, type: 3}
 --- !u!1001 &1992380732
 PrefabInstance:
   m_ObjectHideFlags: 0

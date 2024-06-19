@@ -100,10 +100,15 @@ public class GameManager : MonoBehaviour
         Destroy(this);
     }
 
-    public void LoadCredits()
+    public void LoadCredits(AudioClip clip = null)
     {
         SceneManager.LoadScene(CREDITS_SCENE);
         StopMainTheme();
+        if (clip != null) 
+        { 
+            _audioSource.clip = clip;
+            _audioSource.Play();
+        }
         Destroy(this);
     }
 
