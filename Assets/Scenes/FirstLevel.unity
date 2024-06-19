@@ -2540,7 +2540,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499967121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3803,21 +3803,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1014793374705128930, guid: bb428d815abcc104eb9609730e77e0b7, type: 3}
-      propertyPath: playerConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: 6e7b3d1513f0644799d6b6ad45c9d19b, type: 2}
-    - target: {fileID: 1014793374705128930, guid: bb428d815abcc104eb9609730e77e0b7, type: 3}
-      propertyPath: movementConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: acf274f61bf6f4ecca484261dffdb550, type: 2}
     - target: {fileID: 2096797669289848382, guid: bb428d815abcc104eb9609730e77e0b7, type: 3}
       propertyPath: m_Name
       value: Player1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2096797669289848382, guid: bb428d815abcc104eb9609730e77e0b7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5007989267785586768, guid: bb428d815abcc104eb9609730e77e0b7, type: 3}
       propertyPath: m_RootOrder
@@ -3825,11 +3813,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5007989267785586768, guid: bb428d815abcc104eb9609730e77e0b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.091825
+      value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 5007989267785586768, guid: bb428d815abcc104eb9609730e77e0b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.972015
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 5007989267785586768, guid: bb428d815abcc104eb9609730e77e0b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -24545,11 +24533,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5007989267785586768, guid: 84c02fa7c28492d4b9871f924337b228, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.091825
+      value: 3.2600021
       objectReference: {fileID: 0}
     - target: {fileID: 5007989267785586768, guid: 84c02fa7c28492d4b9871f924337b228, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.972015
+      value: 0.17000055
       objectReference: {fileID: 0}
     - target: {fileID: 5007989267785586768, guid: 84c02fa7c28492d4b9871f924337b228, type: 3}
       propertyPath: m_LocalPosition.z
