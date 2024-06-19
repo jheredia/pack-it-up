@@ -1667,13 +1667,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timer: {fileID: 1430417398}
   _inventory: {fileID: 1826808342}
+  _shop: {fileID: 0}
   _debugMode: 0
   _debugScene: Playground
   _levels:
   - FirstLevel
   - SecondLevel
   - ThirdLevel
-  _startingLevelIndex: 1
+  _startingLevelIndex: 0
+  _activateShop: 0
 --- !u!4 &1778988393
 Transform:
   m_ObjectHideFlags: 0
