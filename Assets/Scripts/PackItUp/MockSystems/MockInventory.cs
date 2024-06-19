@@ -59,7 +59,7 @@ using UnityEngine;
 
     private void OnDisable()
     {
-        GameManager.Instance.GetShop().OnShopExit -= UpdateCoinTotal;
+        //GameManager.Instance.GetShop().OnShopExit -= UpdateCoinTotal;
     }
 
     public void UpdateCoinTotal(object sender, int value)

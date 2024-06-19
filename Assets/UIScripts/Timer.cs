@@ -28,11 +28,11 @@ public class Timer : MonoBehaviour
 
     private void RunTimer()
     {
-        if(pause){return;}
+        if (pause) { return; }
         targetTime -= Time.deltaTime;
         if (targetTime <= 0.0f)
         {
-            timerEnded();
+            TimerEnded();
         }
     }
 
@@ -41,7 +41,7 @@ public class Timer : MonoBehaviour
         pause = !pause;
     }
 
-    void timerEnded()
+    void TimerEnded()
     {
         timerFinished?.Invoke();
         hasStarted = false;

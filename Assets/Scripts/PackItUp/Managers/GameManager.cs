@@ -15,14 +15,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public event EventHandler OnGameStart;
     public event EventHandler OnGamePause;
     public event EventHandler OnGameResume;
     public event EventHandler OnShopOpen;
 
     const string MAIN_MENU_SCENE = "MainMenu";
 
-    [SerializeField] MockTimer _timer;
+    [SerializeField] Timer _timer;
     [SerializeField] MockInventory _inventory;
     [SerializeField] Shop _shop;
 
@@ -66,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     public MockInventory GetInventory() => _inventory;
 
-    public MockTimer GetTimer() => _timer;
+    public Timer GetTimer() => _timer;
 
     public Shop GetShop() => _shop;
 

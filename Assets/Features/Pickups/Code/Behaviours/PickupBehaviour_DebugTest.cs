@@ -8,6 +8,6 @@ public class PickupBehaviour_DebugTest : PickupBehaviour
 {
     public override void OnPickupDoThis()
     {
-        Debug.Log("PICK UP BEHAVIOUR TEST.");
+        // Debug.Log("PICK UP BEHAVIOUR TEST.");
     }
 }

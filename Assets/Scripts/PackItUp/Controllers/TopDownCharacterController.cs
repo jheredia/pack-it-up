@@ -1,6 +1,7 @@
 using System;
 using PackItUp.InputSystem;
 using PackItUp.Scriptable;
+using PackItUp.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,7 @@ namespace PackItUp.Controllers {
         
         [SerializeField] private SOPlayerConfig playerConfig;
         [SerializeField] private SOMovementConfig movementConfig;
+        [SerializeField] private DashReadyBar dashReadyBar;
         private Vector2 _moveDirection;
         private Vector2 _ghostForward = Vector2.up;
         private Vector2 _moveForce;
@@ -20,13 +22,9 @@ namespace PackItUp.Controllers {
         private InputAction _dashAction;
         private bool _isDashing;
         private float _timeDashing;
-        private float _timeSinceLastDash;
-        
-        [SerializeField] private bool showDebug;
-        
         private bool _isActive = true;
         
-        public float NormalizedTimeUntilDash => Math.Clamp(_timeSinceLastDash / movementConfig.dashCooldown, 0, 1);
+        [SerializeField] private bool showDebug;
 
         private void Awake() {
             _rb = GetComponent<Rigidbody2D>();
@@ -36,6 +34,7 @@ namespace PackItUp.Controllers {
             _moveAction.canceled += _ => _moveDirection = Vector2.zero;
             _dashAction = playerConfig.GetDashAction(_playerControls);
             _dashAction.performed += _ => Dash();
+            dashReadyBar.SetCoolDown(movementConfig.dashCooldown);
         }
 
         private void OnEnable() {
@@ -49,10 +48,7 @@ namespace PackItUp.Controllers {
         }
 
         private void FixedUpdate() {
-            
             if (!_isActive) return;
-            
-            _timeSinceLastDash += Time.fixedDeltaTime;
             
             if (_isDashing) {
                 PerformDash();
@@ -97,16 +93,14 @@ namespace PackItUp.Controllers {
         }
 
         private void Dash() {
-            if (_isDashing) return;
-            if (_timeSinceLastDash < movementConfig.dashCooldown) return;
+            if (_isDashing || !dashReadyBar.IsReady()) return;
             _isDashing = true;
-            _timeSinceLastDash = 0;
             _timeDashing = 0;
+            dashReadyBar.Reset();
             PerformDash();
         }
         
         private void PerformDash() {
-            
             if (_timeDashing >= movementConfig.dashDuration) {
                 _isDashing = false;
                 return;
