@@ -74,6 +74,7 @@ namespace PackItUp.Shop
             // Send recent coin total after purchases
             OnClearOptions?.Invoke(this, _tempCoinTotal);
 
+            GameManager.Instance.AdvanceLevelAndStart();
             gameObject.SetActive(false);
         }
 

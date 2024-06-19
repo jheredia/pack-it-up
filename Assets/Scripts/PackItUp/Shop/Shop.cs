@@ -69,11 +69,5 @@ namespace PackItUp.Shop
         {
             return _coinTotal;
         }
-
-
-        /*public void CloseShopUI(object sender, int _)
-        {
-            _shopUI.SetActive(false);
-        }*/
     }
 }

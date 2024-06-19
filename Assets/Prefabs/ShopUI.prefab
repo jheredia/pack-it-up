@@ -508,7 +508,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5734426189320628258}
+      - m_Target: {fileID: 4559860222563172760}
         m_TargetAssemblyTypeName: PackItUp.Shop.ShopUIControl, Assembly-CSharp
         m_MethodName: Purchase
         m_Mode: 2
@@ -668,13 +668,14 @@ GameObject:
   - component: {fileID: 671841383071190577}
   - component: {fileID: 3176968079479053540}
   - component: {fileID: 5367513224056439794}
+  - component: {fileID: 4559860222563172760}
   m_Layer: 5
   m_Name: ShopUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8869208561563983063
 RectTransform:
   m_ObjectHideFlags: 0
@@ -688,7 +689,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5312963599196019734}
-  - {fileID: 6997885048574884511}
   - {fileID: 5560482786908957494}
   - {fileID: 562463376498320149}
   - {fileID: 6869065354120682093}
@@ -777,12 +777,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c195b3e94022dae4f9d3eb9cc02643d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shopController: {fileID: 5734426189320628258}
+  _shopController: {fileID: 4559860222563172760}
   _shopOptions:
   - {fileID: 1969267776504585413}
   - {fileID: 1932858225862067253}
   - {fileID: 300931616361842746}
   _coinText: {fileID: 1829039694572711336}
+--- !u!114 &4559860222563172760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098743334300856494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff28f73ec59bba4b9ddb2571a589b5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2209835812726846102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,7 +1187,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5734426189320628258}
+      - m_Target: {fileID: 4559860222563172760}
         m_TargetAssemblyTypeName: PackItUp.Shop.ShopUIControl, Assembly-CSharp
         m_MethodName: Continue
         m_Mode: 1
@@ -1310,7 +1322,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5734426189320628258}
+      - m_Target: {fileID: 4559860222563172760}
         m_TargetAssemblyTypeName: PackItUp.Shop.ShopUIControl, Assembly-CSharp
         m_MethodName: Purchase
         m_Mode: 2
@@ -1889,7 +1901,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5734426189320628258}
+      - m_Target: {fileID: 4559860222563172760}
         m_TargetAssemblyTypeName: PackItUp.Shop.ShopUIControl, Assembly-CSharp
         m_MethodName: Purchase
         m_Mode: 2
@@ -2112,50 +2124,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &7273990763534931811
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6997885048574884511}
-  - component: {fileID: 5734426189320628258}
-  m_Layer: 0
-  m_Name: ShopUIControl
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6997885048574884511
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7273990763534931811}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -193.73785, y: 121.92023, z: -5.8606877}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8869208561563983063}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5734426189320628258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7273990763534931811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ff28f73ec59bba4b9ddb2571a589b5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7865048329983522182
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,7 +2690,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5734426189320628258}
+      - m_Target: {fileID: 4559860222563172760}
         m_TargetAssemblyTypeName: PackItUp.Shop.ShopUIControl, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
