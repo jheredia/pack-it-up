@@ -6,7 +6,7 @@ using UnityEngine;
 public class MockInventory : MonoBehaviour
 {
     public EventHandler OnKeyItemsCollected;
-    public EventHandler<List <GameObject>> OnItemsRequest;
+    public EventHandler<List<GameObject>> OnItemsRequest;
     private int _coinTotal = 20;
 
     public void AcceptPickupData(CharacterPickupPair pair)
@@ -25,12 +25,12 @@ public class MockInventory : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.Instance.GetShop().OnShopExit += UpdateCoinTotal;
+        //GameManager.Instance.GetShop().OnShopExit += UpdateCoinTotal;
     }
 
     private void OnDisable()
     {
-        GameManager.Instance.GetShop().OnShopExit -= UpdateCoinTotal;
+        //GameManager.Instance.GetShop().OnShopExit -= UpdateCoinTotal;
     }
 
     public void UpdateCoinTotal(object sender, int value)

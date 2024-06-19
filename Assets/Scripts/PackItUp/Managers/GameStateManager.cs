@@ -31,6 +31,7 @@ namespace PackItUp.Managers
 
         [SerializeField] // For testing purposes
         private bool _winCondition = false;
+        private Behaviour_MoveObjectsToPoints _pickupMover;
 
         // Exit condition will start as false as neither player is on an end zone yet
         [SerializeField] // For testing purposes
@@ -53,14 +54,19 @@ namespace PackItUp.Managers
         // In each level, we'll have an end zone, this will be activate once the objective is completed allowing the player 
         // to end the game in a success state
         private EndZone[] _endZones;
+        private Component_ObjectInstantiator _pickupInstantiator;
 
         private void Awake()
         {
             _gameManager = GameManager.Instance;
-            _timer = _gameManager.GetTimer();
+            // _timer = _gameManager.GetTimer();
             _inventory = _gameManager.GetInventory();
             _players = _gameManager.GetPlayers();
             _endZones = FindObjectsOfType<EndZone>();
+            _pickupInstantiator = FindObjectOfType<Component_ObjectInstantiator>();
+            _pickupInstantiator.BeginInstantiation();
+            _pickupMover = FindObjectOfType<Behaviour_MoveObjectsToPoints>();
+            _pickupMover.StartMovingObjects();
             _exitCondition = false;
             _winCondition = false;
         }
@@ -69,7 +75,7 @@ namespace PackItUp.Managers
         {
             _gameManager.OnGameStart += StartGame;
             _inventory.OnKeyItemsCollected += CompleteObjective;
-            _timer.OnTimerRunOut += EndGameFailedState;
+            //_timer.OnTimerRunOut += EndGameFailedState;
             EndZone.OnPlayerEnteredZone += TryEndGameSuccessfully;
             // EndZone.OnPlayerExitZone += CancelEndGameCountdown;
             EndZone.OnEndZoneEmpty += DeactivateExitCondition;
