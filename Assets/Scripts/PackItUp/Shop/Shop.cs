@@ -28,12 +28,26 @@ namespace PackItUp.Shop
             _inventory = _gameManager.GetInventory();
         }
 
+        /*void Start()
+        {
+            StartCoroutine(StartRoutine());
+        }
+
+        private IEnumerator<out> StartRoutine()
+        {
+            yield return new WaitForSeconds(.2f);
+
+            GetShopUI();
+        }
+*/
         public void GetShopUI()
         {
             // Get Shop UI from current scene
             _shopUI = GameObject.FindWithTag("ShopUI");
+            Debug.Log(_shopUI);
             if (_shopUI != null)
             {
+                Debug.Log("got new data");
                 Debug.Log("shoprevamped");
                 _shopController = _shopUI.GetComponent<ShopUIControl>();
             }
