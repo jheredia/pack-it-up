@@ -166,6 +166,7 @@ namespace PackItUp.Managers
             Debug.Log("End level success");
             _timerUIControl.TogglePause();
             OnLevelSuccess?.Invoke(this, EventArgs.Empty);
+            _gameManager.DrawShop();
         }
 
         private void EndGameFailedState()

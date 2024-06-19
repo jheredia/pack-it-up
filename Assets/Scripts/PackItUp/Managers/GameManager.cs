@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
     {
         if (_debugMode) SceneManager.LoadScene(_debugScene);
         else SceneManager.LoadScene(_currentLevel);
+        _shop.GetShopUI();
     }
 
     void NextLevel()
@@ -96,7 +97,7 @@ public class GameManager : MonoBehaviour
         Destroy(this);
     }
 
-    public void DrawShop(object sender, EventArgs e)
+    public void DrawShop()
     {
         // Draw shop
         OnShopOpen?.Invoke(this, null);
@@ -106,14 +107,5 @@ public class GameManager : MonoBehaviour
     public void DrawPauseMenu(object sender, EventArgs e)
     {
         OnGamePause?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void Update()
-    {
-        if (_activateShop)
-        {
-            OnShopOpen?.Invoke(this, null);
-            _activateShop = false;
-        }
     }
 }

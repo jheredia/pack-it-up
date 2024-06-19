@@ -28,13 +28,16 @@ namespace PackItUp.Shop
             _shop = GameManager.Instance.GetShop();
         }
 
+        public ShopUIControl GetShopController()
+        {
+            return _shopController;
+        }
+
         private void OnEnable()
         {
             // Restock shop after level completion and get updated coin amount for UI
-            _itemsForSale = _shop.GetMissingItems();
             _tempCoinTotal = _shop.ReturnCoinTotal();
             _coinText.text = _startingCoinText + _tempCoinTotal.ToString();
-            RestockShop();
 
             _shopController.OnContinue += ClearOptions;
             _shopController.OnPurchase += UpdateTempCoinTotal;
@@ -48,6 +51,7 @@ namespace PackItUp.Shop
 
         public void RestockShop()
         {
+            _itemsForSale = _shop.GetMissingItems();
             // Get buff/debuff items that were missed in the previous stage
             Debug.Log("Restocking Shop");
             foreach (ShopOption _option in _shopOptions)

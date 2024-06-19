@@ -266,7 +266,7 @@ MonoBehaviour:
   - PACK !!!!
   - TIME'S UP !!
   initTextTransitionTime: 1.35
-  timerTime: 60
+  timerTime: 120
   startTimer: 0
   timerFinished:
     m_PersistentCalls:
@@ -1088,7 +1088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2098743334300856494, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2276246860778207651, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -4068,6 +4068,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6416183410249908474, guid: 84c02fa7c28492d4b9871f924337b228, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 6449747990620661745, guid: 84c02fa7c28492d4b9871f924337b228, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -6093,6 +6097,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6416183410249908474, guid: bb428d815abcc104eb9609730e77e0b7, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 6449747990620661745, guid: bb428d815abcc104eb9609730e77e0b7, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -6897,6 +6905,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5392594265741315850, guid: 6e61c99f50ee9ed49b7eebb76661db79, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5392594265741315850, guid: 6e61c99f50ee9ed49b7eebb76661db79, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
       value: 2

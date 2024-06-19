@@ -12,8 +12,8 @@ namespace PackItUp.Shop
         private GameManager _gameManager;
         private MockInventory _inventory;
         
-        [SerializeField] private GameObject _shopUI;
-        [SerializeField] private ShopUIControl _shopController;
+        private GameObject _shopUI;
+        private ShopUIControl _shopController;
 
         public event EventHandler<int> OnShopExit;
 
@@ -21,8 +21,23 @@ namespace PackItUp.Shop
 
         private void Awake()
         {
+            // Get Shop UI from current scene
+            GetShopUI();
+
             _gameManager = GameManager.Instance;
             _inventory = _gameManager.GetInventory();
+        }
+
+        public void GetShopUI()
+        {
+            // Get Shop UI from current scene
+            _shopUI = GameObject.FindWithTag("ShopUI");
+            if (_shopUI != null)
+            {
+                Debug.Log("shoprevamped");
+                _shopController = _shopUI.GetComponent<ShopUIControl>();
+            }
+            _shopUI.SetActive(false);
         }
 
         private void OnEnable()
@@ -51,6 +66,7 @@ namespace PackItUp.Shop
             Debug.Log("Opening Shop");
             RestockCoins();
             _shopUI.SetActive(true);
+            _shopUI.GetComponent<ShopUI>()?.RestockShop();
         }
         
 
