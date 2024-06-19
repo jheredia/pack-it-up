@@ -169,7 +169,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -309,7 +309,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -898221913
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: -236
   m_Sprite: {fileID: 21300000, guid: 0010ba130c746244d80856d1ebb20d76, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
