@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnShopOpen;
 
     const string MAIN_MENU_SCENE = "MainMenu";
+    const string CREDITS_SCENE = "Credits";
 
     [SerializeField] Timer _timer;
     [SerializeField] MockInventory _inventory;
@@ -99,6 +100,13 @@ public class GameManager : MonoBehaviour
         Destroy(this);
     }
 
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene(CREDITS_SCENE);
+        StopMainTheme();
+        Destroy(this);
+    }
+
     public void DrawShop(object sender, EventArgs e)
     {
         // Draw shop
@@ -123,5 +131,10 @@ public class GameManager : MonoBehaviour
     public void StopMainTheme()
     {
         _audioSource.Stop();
+    }
+
+    public void PlaySoundFX(AudioClip clip)
+    {
+        _audioSource.PlayOneShot(clip);
     }
 }

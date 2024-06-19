@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2144015203951104823}
-  - component: {fileID: 6031243017906919322}
+  - component: {fileID: 5471578851734110565}
   m_Layer: 0
   m_Name: Item Effect Handling
   m_TagString: Untagged
@@ -30,9 +30,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6031243017906919322
+--- !u!114 &5471578851734110565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6836829660322228819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5be3e9d3eccd08f4d806f7cc50767f2c, type: 3}
+  m_Script: {fileID: 11500000, guid: bbce949dcc1d1af4dad4f8bdfff737d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mods: []
+  effectList: []
+  currentVelocityMod: 0
