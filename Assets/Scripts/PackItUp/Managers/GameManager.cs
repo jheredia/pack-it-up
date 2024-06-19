@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using PackItUp.Controllers;
 using PackItUp.Managers;
-using PackItUp.MapGenerator;
 using PackItUp.MockSystems;
 using PackItUp.Shop;
 

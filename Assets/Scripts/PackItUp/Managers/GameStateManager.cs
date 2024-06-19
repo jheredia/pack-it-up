@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using PackItUp.Controllers;
 using PackItUp.Interactables;
-using PackItUp.MapGenerator;
 using PackItUp.MockSystems;
 using UnityEngine;
 
@@ -49,8 +48,6 @@ namespace PackItUp.Managers
         // The timer exists only in the game manager, we need to listen to the event emmited when the timer runs out
         private Timer _timer;
 
-        // The current level, this will live in the game manager, the game state manager is agnostic of which level is the player on
-        private Level _currentLevel;
 
         // In each level, we'll have an end zone, this will be activate once the objective is completed allowing the player 
         // to end the game in a success state

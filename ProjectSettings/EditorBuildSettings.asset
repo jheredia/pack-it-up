@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/FirstLevel 1.unity
     guid: e85d76d631e71d54d92a886cde7717e0
+  - enabled: 1
+    path: Assets/Scenes/FirstLevel.unity
+    guid: 2a620faf5ac79774fb133412401580c2
+  - enabled: 0
+    path: Assets/Scenes/UI.unity
+    guid: bd9ad6ed336b6d742bef0b31556d6f86
   m_configObjects: {}
