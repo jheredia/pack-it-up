@@ -355,7 +355,7 @@ Transform:
   - {fileID: 1698919480}
   - {fileID: 2002375573}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &53989424
 GameObject:
@@ -7089,6 +7089,10 @@ PrefabInstance:
     - target: {fileID: 2098743334300856494, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
       propertyPath: m_Name
       value: ShopUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2098743334300856494, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2276246860778207651, guid: a27d89ef2b49c2c428305f4b0611e47d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode

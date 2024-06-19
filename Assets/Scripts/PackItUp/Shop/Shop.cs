@@ -56,6 +56,7 @@ namespace PackItUp.Shop
 
         public List<PickupData> GetMissingItems()
         {
+            Debug.Log(_inventory);
             return _inventory.GetMissingItems();
         }
 
