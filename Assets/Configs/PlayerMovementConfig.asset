@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topSpeed: 20
   acceleration: 200
-  turnRate: 0.95
-  drag: 0.95
-  drift: 0.5
+  turnRate: 0.9
+  drag: 0.9
+  drift: 0.4
   dashDuration: 0.5
   dashMultiplier: 2.5
-  dashCooldown: 5
+  dashCooldown: 3.5
