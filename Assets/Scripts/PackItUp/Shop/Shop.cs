@@ -54,8 +54,9 @@ namespace PackItUp.Shop
         }
         
 
-        public List<GameObject> GetMissingItems()
+        public List<PickupData> GetMissingItems()
         {
+            Debug.Log(_inventory);
             return _inventory.GetMissingItems();
         }
 
@@ -69,11 +70,5 @@ namespace PackItUp.Shop
         {
             return _coinTotal;
         }
-
-
-        /*public void CloseShopUI(object sender, int _)
-        {
-            _shopUI.SetActive(false);
-        }*/
     }
 }
