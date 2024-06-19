@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 2096796921ca49546ab72682a6c14fad, type: 3}
+    - target: {fileID: 6351217490156104745, guid: ab970b2cb7018cb4a8895cb79e3c464c, type: 3}
+      propertyPath: dataWrapper
+      value: 
+      objectReference: {fileID: 11400000, guid: 87b86f01dc2e2f84f8562438898353bc, type: 2}
     - target: {fileID: 7670175186237174704, guid: ab970b2cb7018cb4a8895cb79e3c464c, type: 3}
       propertyPath: m_Name
       value: Collectable Duck Variant
