@@ -1672,6 +1672,7 @@ MonoBehaviour:
   _levels:
   - FirstLevel
   - SecondLevel
+  - ThirdLevel
   _startingLevelIndex: 1
 --- !u!4 &1778988393
 Transform:
