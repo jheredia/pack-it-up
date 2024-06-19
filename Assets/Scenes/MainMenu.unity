@@ -1671,7 +1671,7 @@ MonoBehaviour:
   _debugMode: 0
   _debugScene: Playground
   _levels:
-  - FirstLevel
+  - FirstLevel 1
   - SecondLevel
   - ThirdLevel
   _startingLevelIndex: 1

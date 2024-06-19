@@ -44,11 +44,11 @@ TagManager:
   - name: Background
     uniqueID: 2267995263
     locked: 0
-  - name: Obstacles
-    uniqueID: 2735598995
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Obstacles
+    uniqueID: 2735598995
     locked: 0
   - name: Items
     uniqueID: 30597443
