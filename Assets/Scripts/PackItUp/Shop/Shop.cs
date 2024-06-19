@@ -54,7 +54,7 @@ namespace PackItUp.Shop
         }
         
 
-        public List<GameObject> GetMissingItems()
+        public List<PickupData> GetMissingItems()
         {
             return _inventory.GetMissingItems();
         }

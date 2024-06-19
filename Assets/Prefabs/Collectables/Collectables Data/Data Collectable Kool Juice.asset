@@ -16,7 +16,7 @@ MonoBehaviour:
     displayName: Kool Juice
     bigSprite: {fileID: 1726262740, guid: c1031fd9e8050c64b9c8f5e197dad9b0, type: 3}
     isKeyItem: 0
-    isInventoryItem: 0
+    isInventoryItem: 1
     isStackItem: 0
     stackNumber: 0
     itemEffect: {fileID: 11400000, guid: c7f59466ec707634ea1b3316ed1755cf, type: 2}

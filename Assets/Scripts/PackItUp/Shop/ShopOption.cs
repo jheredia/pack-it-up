@@ -7,12 +7,15 @@ using TMPro;
 
 namespace PackItUp.Shop
 {
+    [Serializable]
     public class ShopOption : MonoBehaviour
     {
         // Values to fill for purchasable object in shop UI
         [SerializeField] private Image _objectImage;
         [SerializeField] private TMP_Text _objectDescription;
-        [SerializeField] private int _objectValue;
+        private int _objectValue;
+        [SerializeField] private TMP_Text _purchaseButtonText;
+        
 
         public Image ObjectImage
         {
@@ -50,6 +53,18 @@ namespace PackItUp.Shop
             }
         }
 
+        public TMP_Text PurchaseButtonText
+        {
+            get
+            {
+                return _purchaseButtonText;
+            }
+            set
+            {
+                _purchaseButtonText = value;
+            }
+        }
+
         // Identifies object as item, or if not, a souvenir
         public bool _isItem = false;
         
@@ -58,11 +73,12 @@ namespace PackItUp.Shop
             return _isItem;
         }
 
-        public void AddObject(GameObject _newObject)
+        public void AddObject(PickupData _newObject)
         {
-            //_objectImage = _newObject.image;
-            //_objectDescription = _newObject.description;
-            //_objectValue = _newObject.value;
+            _objectImage.sprite = _newObject.bigSprite;
+            _objectDescription.text = "";
+            _objectValue = 4;
+            _purchaseButtonText.text = _objectValue.ToString();
         }
     }
 }

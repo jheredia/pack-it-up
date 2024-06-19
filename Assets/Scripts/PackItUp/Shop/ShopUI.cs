@@ -14,14 +14,17 @@ namespace PackItUp.Shop
         private Shop _shop;
         [SerializeField] private List<ShopOption> _shopOptions;
         [SerializeField] private TMP_Text _coinText;
+
         private List<GameObject> _souvenirsForSale;
-        private List<GameObject> _itemsForSale;
+        private List<PickupData> _itemsForSale;
 
         public event EventHandler<int> OnClearOptions;
         private int _tempCoinTotal;
+        private string _startingCoinText;
 
         private void Awake()
         {
+            _startingCoinText = _coinText.text;
             _shop = GameManager.Instance.GetShop();
         }
 
@@ -30,7 +33,8 @@ namespace PackItUp.Shop
             // Restock shop after level completion and get updated coin amount for UI
             _itemsForSale = _shop.GetMissingItems();
             _tempCoinTotal = _shop.ReturnCoinTotal();
-            _coinText.text = _tempCoinTotal.ToString();
+            _coinText.text = _startingCoinText + _tempCoinTotal.ToString();
+            RestockShop();
 
             _shopController.OnContinue += ClearOptions;
             _shopController.OnPurchase += UpdateTempCoinTotal;
@@ -39,27 +43,22 @@ namespace PackItUp.Shop
         private void OnDisable()
         {
             _shopController.OnContinue -= ClearOptions;
-            _shopController.OnPurchase += UpdateTempCoinTotal;
+            _shopController.OnPurchase -= UpdateTempCoinTotal;
         }
 
-        public void RestockShop(List<GameObject> itemsMissing)
+        public void RestockShop()
         {
             // Get buff/debuff items that were missed in the previous stage
+            Debug.Log("Restocking Shop");
             foreach (ShopOption _option in _shopOptions)
             {
                 // Fill items row with missed items
-                if (_option.GetItemType() && itemsMissing.Count > 0)
+                Debug.Log(_itemsForSale.Count);
+                if (_option.GetItemType() && _itemsForSale.Count > 0)
                 {
                     _option.enabled = true;
-                    _option.AddObject(itemsMissing[0]);
-                    itemsMissing.RemoveAt(0);
-                }
-                // Fill souvenirs row with sounevirs to buy
-                else if (_souvenirsForSale.Count > 0)
-                {
-                    _option.enabled = true;
-                    _option.AddObject(_souvenirsForSale[0]);
-                    _souvenirsForSale.RemoveAt(0);
+                    _option.AddObject(_itemsForSale[0]);
+                    _itemsForSale.RemoveAt(0);
                 }
             }
         }
@@ -81,7 +80,7 @@ namespace PackItUp.Shop
         public void UpdateTempCoinTotal(object sender, ShopOption option)
         {
             _tempCoinTotal -= option.ObjectValue;
-            _coinText.text = _tempCoinTotal.ToString();
+            _coinText.text = _startingCoinText + _tempCoinTotal.ToString();
         }
     }
 }
