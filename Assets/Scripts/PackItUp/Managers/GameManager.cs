@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     const string MAIN_MENU_SCENE = "MainMenu";
 
-    [SerializeField] MockTimer _timer;
+    [SerializeField] Timer _timer;
     [SerializeField] MockInventory _inventory;
     [SerializeField] Shop _shop;
 
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     public MockInventory GetInventory() => _inventory;
 
-    public MockTimer GetTimer() => _timer;
+    public Timer GetTimer() => _timer;
 
     public Shop GetShop() => _shop;
 

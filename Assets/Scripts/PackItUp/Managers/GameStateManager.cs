@@ -46,7 +46,7 @@ namespace PackItUp.Managers
         private MockInventory _inventory;
 
         // The timer exists only in the game manager, we need to listen to the event emmited when the timer runs out
-        private MockTimer _timer;
+        private Timer _timer;
 
         // The current level, this will live in the game manager, the game state manager is agnostic of which level is the player on
         private Level _currentLevel;
@@ -56,10 +56,12 @@ namespace PackItUp.Managers
         private EndZone[] _endZones;
         private Component_ObjectInstantiator _pickupInstantiator;
 
+        private UIControl _timerUIControl;
+
         private void Awake()
         {
             _gameManager = GameManager.Instance;
-            // _timer = _gameManager.GetTimer();
+            _timer = _gameManager.GetTimer();
             _inventory = _gameManager.GetInventory();
             _players = _gameManager.GetPlayers();
             _endZones = FindObjectsOfType<EndZone>();
@@ -69,31 +71,34 @@ namespace PackItUp.Managers
             _pickupMover.StartMovingObjects();
             _exitCondition = false;
             _winCondition = false;
+            _timerUIControl = FindObjectOfType<UIControl>();
         }
 
         private void OnEnable()
         {
             _gameManager.OnGameStart += StartGame;
             _inventory.OnKeyItemsCollected += CompleteObjective;
-            //_timer.OnTimerRunOut += EndGameFailedState;
             EndZone.OnPlayerEnteredZone += TryEndGameSuccessfully;
             // EndZone.OnPlayerExitZone += CancelEndGameCountdown;
             EndZone.OnEndZoneEmpty += DeactivateExitCondition;
+            _timerUIControl.timerFinished.AddListener(EndGameFailedState);
         }
 
         private void OnDisable()
         {
             _gameManager.OnGameStart -= StartGame;
             _inventory.OnKeyItemsCollected -= CompleteObjective;
-            _timer.OnTimerRunOut -= EndGameFailedState;
+            _timer.timerFinished.RemoveListener(EndGameFailedState);
             EndZone.OnPlayerEnteredZone -= TryEndGameSuccessfully;
             // EndZone.OnPlayerExitZone -= CancelEndGameCountdown;
             EndZone.OnEndZoneEmpty -= DeactivateExitCondition;
+            _timerUIControl.timerFinished.RemoveListener(EndGameFailedState);
         }
 
         private void StartGame(object sender, EventArgs e)
         {
             _winCondition = false;
+            _timerUIControl.StartTimer();
             OnLevelStart?.Invoke(this, EventArgs.Empty);
         }
 
@@ -139,10 +144,11 @@ namespace PackItUp.Managers
         private void EndGameSuccessState()
         {
             Debug.Log("End level success");
+            _timerUIControl.TogglePause();
             OnLevelSuccess?.Invoke(this, EventArgs.Empty);
         }
 
-        private void EndGameFailedState(object sender, EventArgs e)
+        private void EndGameFailedState()
         {
             Debug.Log("End level fail");
             OnLevelFailed?.Invoke(this, EventArgs.Empty);

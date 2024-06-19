@@ -1665,7 +1665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95261f193de5fa34eaaef0ad0a5d215b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timer: {fileID: 1430417398}
+  _timer: {fileID: 0}
   _inventory: {fileID: 1826808342}
   _shop: {fileID: 0}
   _debugMode: 0
@@ -1674,7 +1674,7 @@ MonoBehaviour:
   - FirstLevel
   - SecondLevel
   - ThirdLevel
-  _startingLevelIndex: 0
+  _startingLevelIndex: 1
   _activateShop: 0
 --- !u!4 &1778988393
 Transform:
