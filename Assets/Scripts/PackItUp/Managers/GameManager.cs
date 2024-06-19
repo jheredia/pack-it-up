@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using PackItUp.Controllers;
 using PackItUp.Managers;
-using PackItUp.MapGenerator;
 using PackItUp.MockSystems;
 using PackItUp.Shop;
 
@@ -20,6 +19,7 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnShopOpen;
 
     const string MAIN_MENU_SCENE = "MainMenu";
+    const string CREDITS_SCENE = "Credits";
 
     [SerializeField] Timer _timer;
     [SerializeField] MockInventory _inventory;
@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     // Ends level to test shop UI
     public bool _activateShop;
 
+    private AudioSource _audioSource;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
         _currentLevel = _levels[_startingLevelIndex];
 
         _players = FindObjectsOfType<TopDownCharacterController>();
+        _audioSource = GetComponent<AudioSource>();
         // Create player controllers, set up timer, etc
     }
 
@@ -94,6 +97,19 @@ public class GameManager : MonoBehaviour
     void LoadMenu(object sender, EventArgs e)
     {
         SceneManager.LoadScene(MAIN_MENU_SCENE);
+        StopMainTheme();
+        Destroy(this);
+    }
+
+    public void LoadCredits(AudioClip clip = null)
+    {
+        SceneManager.LoadScene(CREDITS_SCENE);
+        StopMainTheme();
+        if (clip != null) 
+        { 
+            _audioSource.clip = clip;
+            _audioSource.Play();
+        }
         Destroy(this);
     }
 
@@ -107,5 +123,24 @@ public class GameManager : MonoBehaviour
     public void DrawPauseMenu(object sender, EventArgs e)
     {
         OnGamePause?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Update()
+    {
+        if (_activateShop)
+        {
+            OnShopOpen?.Invoke(this, null);
+            _activateShop = false;
+        }
+    }
+
+    public void StopMainTheme()
+    {
+        _audioSource.Stop();
+    }
+
+    public void PlaySoundFX(AudioClip clip)
+    {
+        _audioSource.PlayOneShot(clip);
     }
 }

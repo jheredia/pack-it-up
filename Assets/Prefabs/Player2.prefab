@@ -76,9 +76,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5007989267785586768}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 7560731415932658270}
   - component: {fileID: 6128311552600199708}
   - component: {fileID: 8664058676757456900}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: P2Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -248,9 +248,9 @@ GameObject:
   - component: {fileID: 2851081610402891397}
   - component: {fileID: 2800224721655157108}
   - component: {fileID: 2729355254088939721}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Visual
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -369,9 +369,9 @@ GameObject:
   - component: {fileID: 6416183410249908474}
   - component: {fileID: 1014793374705128930}
   - component: {fileID: 994033990683826645}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RB
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -516,6 +516,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Effect Handling
       objectReference: {fileID: 0}
+    - target: {fileID: 6836829660322228819, guid: 952740fe619dc174e806915755c6464c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6031243017906919322, guid: 952740fe619dc174e806915755c6464c, type: 3}
     m_RemovedGameObjects: []
@@ -557,9 +561,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6888720397156313506}
     m_Modifications:
+    - target: {fileID: 57544824359066691, guid: acb8331db00a147488bbd9b9d96010df, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814453369573098601, guid: acb8331db00a147488bbd9b9d96010df, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3318534869725859603, guid: acb8331db00a147488bbd9b9d96010df, type: 3}
       propertyPath: m_Name
       value: DashReadyBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3318534869725859603, guid: acb8331db00a147488bbd9b9d96010df, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3528212758478488996, guid: acb8331db00a147488bbd9b9d96010df, type: 3}
       propertyPath: m_RootOrder
@@ -604,6 +620,18 @@ PrefabInstance:
     - target: {fileID: 3528212758478488996, guid: acb8331db00a147488bbd9b9d96010df, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187732486642588727, guid: acb8331db00a147488bbd9b9d96010df, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5549503755220407432, guid: acb8331db00a147488bbd9b9d96010df, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320181195108576798, guid: acb8331db00a147488bbd9b9d96010df, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -689,6 +717,10 @@ PrefabInstance:
     - target: {fileID: 8114490846417109848, guid: 853b04849e9c64846a0fb98c3434b48b, type: 3}
       propertyPath: m_Name
       value: Pickup Handling
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114490846417109848, guid: 853b04849e9c64846a0fb98c3434b48b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
