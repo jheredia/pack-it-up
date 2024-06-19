@@ -8,7 +8,6 @@ namespace PackItUp.Interactables
 {
     [RequireComponent(typeof(Collider2D))]
     [RequireComponent(typeof(SpriteRenderer))]
-    [RequireComponent(typeof(Light))]
     public class EndZone : MonoBehaviour
     {
         //Since we have a procedural generated environment all EndZones listen to the same event to activate the visual cue
@@ -37,16 +36,12 @@ namespace PackItUp.Interactables
             // Visuals initialization 
             _spr = GetComponent<SpriteRenderer>();
             _bc = GetComponent<BoxCollider2D>();
-            _light = GetComponent<Light2D>();
 
             // Adjust box collider and sprite renderer sizes
             _spr.size = size;
             _bc.size = size;
             // Starts with the collider disabled to avoid sending events unnecessarily
             _bc.enabled = false;
-            // Adjust light radius to match greatest dimension length of zone
-            _light.pointLightOuterRadius *= Mathf.Max(size.x, size.y);
-
             _gameStateManager = FindObjectOfType<GameStateManager>();
 
             // Track players in end zone's box collider
@@ -80,7 +75,7 @@ namespace PackItUp.Interactables
 
         private void ActivateVisualCue(object sender, EventArgs e)
         {
-            _light.enabled = true;
+            // _light.enabled = true;
         }
 
         //public void OnActivateVisualCue(object sender, bool activate)

@@ -80,7 +80,6 @@ namespace PackItUp.Managers
         private void OnEnable()
         {
             EndZone.OnPlayerEnteredZone += TryEndGameSuccessfully;
-            // EndZone.OnPlayerExitZone += CancelEndGameCountdown;
             EndZone.OnEndZoneEmpty += DeactivateExitCondition;
             _timerUIControl.timerFinished.AddListener(EndGameFailedState);
             _keyItemTracker.onAllKeyItemsPickedUp.AddListener(CompleteObjective);
@@ -89,7 +88,6 @@ namespace PackItUp.Managers
         private void OnDisable()
         {
             EndZone.OnPlayerEnteredZone -= TryEndGameSuccessfully;
-            // EndZone.OnPlayerExitZone -= CancelEndGameCountdown;
             EndZone.OnEndZoneEmpty -= DeactivateExitCondition;
             _timerUIControl.timerFinished.RemoveListener(EndGameFailedState);
             _keyItemTracker.onAllKeyItemsPickedUp.AddListener(CompleteObjective);
