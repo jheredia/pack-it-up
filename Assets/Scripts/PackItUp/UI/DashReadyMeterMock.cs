@@ -8,7 +8,7 @@ namespace PackItUp.UI {
         [SerializeField] private TextMeshProUGUI text;
 
         private void LateUpdate() {
-            text.text = $"{controller.NormalizedTimeUntilDash * 100:0} %";
+            // text.text = $"{controller.NormalizedTimeUntilDash * 100:0} %";
         }
     }
 }
