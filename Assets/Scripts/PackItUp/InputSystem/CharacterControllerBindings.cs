@@ -46,6 +46,15 @@ namespace PackItUp.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""2f7182f7-1d00-4c5d-8d1f-19466472492d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -114,6 +123,17 @@ namespace PackItUp.InputSystem
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e19dba2-7f39-4ed4-b95d-7aa3d50b6a87"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -134,6 +154,15 @@ namespace PackItUp.InputSystem
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""2f080f85-4b72-4c36-bfdc-a1caa84c198f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""a393832b-a592-4f47-a8c6-9d40834f4016"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -206,6 +235,17 @@ namespace PackItUp.InputSystem
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""463e4550-d0ab-4299-aadb-5a6822801388"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -228,10 +268,12 @@ namespace PackItUp.InputSystem
             m_KeyboardLeft = asset.FindActionMap("KeyboardLeft", throwIfNotFound: true);
             m_KeyboardLeft_Move = m_KeyboardLeft.FindAction("Move", throwIfNotFound: true);
             m_KeyboardLeft_Dash = m_KeyboardLeft.FindAction("Dash", throwIfNotFound: true);
+            m_KeyboardLeft_Exit = m_KeyboardLeft.FindAction("Exit", throwIfNotFound: true);
             // KeyboardRight
             m_KeyboardRight = asset.FindActionMap("KeyboardRight", throwIfNotFound: true);
             m_KeyboardRight_Move = m_KeyboardRight.FindAction("Move", throwIfNotFound: true);
             m_KeyboardRight_Dash = m_KeyboardRight.FindAction("Dash", throwIfNotFound: true);
+            m_KeyboardRight_Exit = m_KeyboardRight.FindAction("Exit", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -295,12 +337,14 @@ namespace PackItUp.InputSystem
         private List<IKeyboardLeftActions> m_KeyboardLeftActionsCallbackInterfaces = new List<IKeyboardLeftActions>();
         private readonly InputAction m_KeyboardLeft_Move;
         private readonly InputAction m_KeyboardLeft_Dash;
+        private readonly InputAction m_KeyboardLeft_Exit;
         public struct KeyboardLeftActions
         {
             private @CharacterControllerBindings m_Wrapper;
             public KeyboardLeftActions(@CharacterControllerBindings wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_KeyboardLeft_Move;
             public InputAction @Dash => m_Wrapper.m_KeyboardLeft_Dash;
+            public InputAction @Exit => m_Wrapper.m_KeyboardLeft_Exit;
             public InputActionMap Get() { return m_Wrapper.m_KeyboardLeft; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -316,6 +360,9 @@ namespace PackItUp.InputSystem
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
             }
 
             private void UnregisterCallbacks(IKeyboardLeftActions instance)
@@ -326,6 +373,9 @@ namespace PackItUp.InputSystem
                 @Dash.started -= instance.OnDash;
                 @Dash.performed -= instance.OnDash;
                 @Dash.canceled -= instance.OnDash;
+                @Exit.started -= instance.OnExit;
+                @Exit.performed -= instance.OnExit;
+                @Exit.canceled -= instance.OnExit;
             }
 
             public void RemoveCallbacks(IKeyboardLeftActions instance)
@@ -349,12 +399,14 @@ namespace PackItUp.InputSystem
         private List<IKeyboardRightActions> m_KeyboardRightActionsCallbackInterfaces = new List<IKeyboardRightActions>();
         private readonly InputAction m_KeyboardRight_Move;
         private readonly InputAction m_KeyboardRight_Dash;
+        private readonly InputAction m_KeyboardRight_Exit;
         public struct KeyboardRightActions
         {
             private @CharacterControllerBindings m_Wrapper;
             public KeyboardRightActions(@CharacterControllerBindings wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_KeyboardRight_Move;
             public InputAction @Dash => m_Wrapper.m_KeyboardRight_Dash;
+            public InputAction @Exit => m_Wrapper.m_KeyboardRight_Exit;
             public InputActionMap Get() { return m_Wrapper.m_KeyboardRight; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -370,6 +422,9 @@ namespace PackItUp.InputSystem
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
             }
 
             private void UnregisterCallbacks(IKeyboardRightActions instance)
@@ -380,6 +435,9 @@ namespace PackItUp.InputSystem
                 @Dash.started -= instance.OnDash;
                 @Dash.performed -= instance.OnDash;
                 @Dash.canceled -= instance.OnDash;
+                @Exit.started -= instance.OnExit;
+                @Exit.performed -= instance.OnExit;
+                @Exit.canceled -= instance.OnExit;
             }
 
             public void RemoveCallbacks(IKeyboardRightActions instance)
@@ -410,11 +468,13 @@ namespace PackItUp.InputSystem
         {
             void OnMove(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
+            void OnExit(InputAction.CallbackContext context);
         }
         public interface IKeyboardRightActions
         {
             void OnMove(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
+            void OnExit(InputAction.CallbackContext context);
         }
     }
 }

@@ -4,6 +4,7 @@ using PackItUp.Scriptable;
 using PackItUp.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace PackItUp.Controllers
 {
@@ -22,6 +23,7 @@ namespace PackItUp.Controllers
         private CharacterControllerBindings _playerControls;
         private InputAction _moveAction;
         private InputAction _dashAction;
+        private InputAction _exitAction;
         private bool _isDashing;
         private float _timeDashing;
         private bool _isActive = true;
@@ -38,6 +40,8 @@ namespace PackItUp.Controllers
             _moveAction.canceled += _ => _moveDirection = Vector2.zero;
             _dashAction = playerConfig.GetDashAction(_playerControls);
             _dashAction.performed += _ => Dash();
+            _exitAction = playerConfig.GetExitAction(_playerControls);
+            _exitAction.performed += _ => ExitGame();
             dashReadyBar.SetCoolDown(movementConfig.dashCooldown);
             _animator = gameObject.GetComponent<Animator>();
         }
@@ -46,12 +50,14 @@ namespace PackItUp.Controllers
         {
             _moveAction.Enable();
             _dashAction.Enable();
+            _exitAction.Enable();
         }
 
         private void OnDisable()
         {
             _moveAction.Disable();
             _dashAction.Disable();
+            _exitAction.Disable();
         }
 
         private void FixedUpdate()
@@ -177,6 +183,11 @@ namespace PackItUp.Controllers
             _animator.ResetTrigger("RunningRight");
             _animator.ResetTrigger("RunningDown");
             _animator.ResetTrigger("Idle");
+        }
+
+        private void ExitGame()
+        {
+            GameManager.Instance.LoadMenu(this, EventArgs.Empty);
         }
     }
 }

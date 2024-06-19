@@ -46,9 +46,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Debug.LogError($"There's more than one GameManager in the scene! {transform} - {Instance}");
-            Destroy(gameObject);
-            return;
+            Destroy(Instance.gameObject);
         }
         Instance = this;
 
@@ -93,23 +91,23 @@ public class GameManager : MonoBehaviour
         StartGame();
     }
 
-    void LoadMenu(object sender, EventArgs e)
+    public void LoadMenu(object sender, EventArgs e)
     {
-        SceneManager.LoadScene(MAIN_MENU_SCENE);
         StopMainTheme();
-        Destroy(this);
+        SceneManager.LoadScene(MAIN_MENU_SCENE);
+        Destroy(gameObject);
     }
 
     public void LoadCredits(AudioClip clip = null)
     {
-        SceneManager.LoadScene(CREDITS_SCENE);
         StopMainTheme();
-        if (clip != null) 
-        { 
+        SceneManager.LoadScene(CREDITS_SCENE);
+        if (clip != null)
+        {
             _audioSource.clip = clip;
             _audioSource.Play();
         }
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     public void DrawShop(object sender, EventArgs e)
