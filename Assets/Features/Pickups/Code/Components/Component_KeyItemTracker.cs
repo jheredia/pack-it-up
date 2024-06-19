@@ -20,8 +20,15 @@ public class Component_KeyItemTracker : MonoBehaviour
 
     public void AcceptPickupPickedUp(CharacterPickupPair pair)
     {
+        print(pair);
         if (pair == null) return;
+        print(pair.pickupData.isKeyItem);
         if (pair.pickupData.isKeyItem) keyItemsPickedUp++;
-        if (keyItemsPickedUp >= totalKeyItemsInScene) onAllKeyItemsPickedUp?.Invoke();
+        print(keyItemsPickedUp);
+        if (keyItemsPickedUp >= totalKeyItemsInScene)
+        {
+            print("All items collected");
+            onAllKeyItemsPickedUp?.Invoke();
+        }
     }
 }

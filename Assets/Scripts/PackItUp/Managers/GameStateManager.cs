@@ -58,14 +58,13 @@ namespace PackItUp.Managers
         private Component_ObjectInstantiator _pickupInstantiator;
 
         private UIControl _timerUIControl;
+        private Component_KeyItemTracker _keyItemTracker;
         [SerializeField]
         private float _initTimer;
 
         private void Awake()
         {
             _gameManager = GameManager.Instance;
-            _timer = _gameManager.GetTimer();
-            _inventory = _gameManager.GetInventory();
             _players = _gameManager.GetPlayers();
             _endZones = FindObjectsOfType<EndZone>();
             _pickupInstantiator = FindObjectOfType<Component_ObjectInstantiator>();
@@ -75,24 +74,25 @@ namespace PackItUp.Managers
             _exitCondition = false;
             _winCondition = false;
             _timerUIControl = FindObjectOfType<UIControl>();
+            _keyItemTracker = FindObjectOfType<Component_KeyItemTracker>();
         }
 
         private void OnEnable()
         {
-            _inventory.OnKeyItemsCollected += CompleteObjective;
             EndZone.OnPlayerEnteredZone += TryEndGameSuccessfully;
             // EndZone.OnPlayerExitZone += CancelEndGameCountdown;
             EndZone.OnEndZoneEmpty += DeactivateExitCondition;
             _timerUIControl.timerFinished.AddListener(EndGameFailedState);
+            _keyItemTracker.onAllKeyItemsPickedUp.AddListener(CompleteObjective);
         }
 
         private void OnDisable()
         {
-            _inventory.OnKeyItemsCollected -= CompleteObjective;
             EndZone.OnPlayerEnteredZone -= TryEndGameSuccessfully;
             // EndZone.OnPlayerExitZone -= CancelEndGameCountdown;
             EndZone.OnEndZoneEmpty -= DeactivateExitCondition;
             _timerUIControl.timerFinished.RemoveListener(EndGameFailedState);
+            _keyItemTracker.onAllKeyItemsPickedUp.AddListener(CompleteObjective);
         }
 
         private void Start()
@@ -125,7 +125,7 @@ namespace PackItUp.Managers
             }
         }
 
-        private void CompleteObjective(object sender, EventArgs e)
+        private void CompleteObjective()
         {
             Debug.Log("Objective completed");
             _winCondition = true;
