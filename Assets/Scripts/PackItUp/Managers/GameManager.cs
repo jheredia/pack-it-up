@@ -107,7 +107,6 @@ public class GameManager : MonoBehaviour
             _audioSource.clip = clip;
             _audioSource.Play();
         }
-        Destroy(gameObject);
     }
 
     public void DrawShop(object sender, EventArgs e)
