@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     // Ends level to test shop UI
     public bool _activateShop;
 
+    private AudioSource _audioSource;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
         _currentLevel = _levels[_startingLevelIndex];
 
         _players = FindObjectsOfType<TopDownCharacterController>();
+        _audioSource = GetComponent<AudioSource>();
         // Create player controllers, set up timer, etc
     }
 
@@ -93,6 +96,7 @@ public class GameManager : MonoBehaviour
     void LoadMenu(object sender, EventArgs e)
     {
         SceneManager.LoadScene(MAIN_MENU_SCENE);
+        StopMainTheme();
         Destroy(this);
     }
 
@@ -115,5 +119,10 @@ public class GameManager : MonoBehaviour
             OnShopOpen?.Invoke(this, null);
             _activateShop = false;
         }
+    }
+
+    public void StopMainTheme()
+    {
+        _audioSource.Stop();
     }
 }
