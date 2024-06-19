@@ -34292,7 +34292,7 @@ MonoBehaviour:
   - PACK !!!!
   - TIME'S UP !!
   initTextTransitionTime: 1.35
-  timerTime: 10
+  timerTime: 60
   startTimer: 0
   timerFinished:
     m_PersistentCalls:

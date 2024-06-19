@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using PackItUp.Controllers;
 using PackItUp.Interactables;
@@ -57,6 +58,8 @@ namespace PackItUp.Managers
         private Component_ObjectInstantiator _pickupInstantiator;
 
         private UIControl _timerUIControl;
+        [SerializeField]
+        private float _initTimer;
 
         private void Awake()
         {
@@ -76,7 +79,6 @@ namespace PackItUp.Managers
 
         private void OnEnable()
         {
-            _gameManager.OnGameStart += StartGame;
             _inventory.OnKeyItemsCollected += CompleteObjective;
             EndZone.OnPlayerEnteredZone += TryEndGameSuccessfully;
             // EndZone.OnPlayerExitZone += CancelEndGameCountdown;
@@ -86,22 +88,42 @@ namespace PackItUp.Managers
 
         private void OnDisable()
         {
-            _gameManager.OnGameStart -= StartGame;
             _inventory.OnKeyItemsCollected -= CompleteObjective;
-            _timer.timerFinished.RemoveListener(EndGameFailedState);
             EndZone.OnPlayerEnteredZone -= TryEndGameSuccessfully;
             // EndZone.OnPlayerExitZone -= CancelEndGameCountdown;
             EndZone.OnEndZoneEmpty -= DeactivateExitCondition;
             _timerUIControl.timerFinished.RemoveListener(EndGameFailedState);
         }
 
-        private void StartGame(object sender, EventArgs e)
+        private void Start()
         {
+            SetActivePlayers(false);
+            StartCoroutine(WaitForTimer());
+            StartGame();
+        }
+
+        private IEnumerator WaitForTimer()
+        {
+            yield return new WaitForSeconds(_initTimer);
+            yield return new WaitForSeconds(_initTimer);
+            yield return new WaitForSeconds(_initTimer);
+        }
+
+        private void StartGame()
+        {
+            SetActivePlayers(true);
             _winCondition = false;
             _timerUIControl.StartTimer();
             OnLevelStart?.Invoke(this, EventArgs.Empty);
         }
 
+        private void SetActivePlayers(bool active)
+        {
+            foreach (TopDownCharacterController _player in _players)
+            {
+                _player.SetActive(active);
+            }
+        }
 
         private void CompleteObjective(object sender, EventArgs e)
         {
@@ -151,6 +173,7 @@ namespace PackItUp.Managers
         private void EndGameFailedState()
         {
             Debug.Log("End level fail");
+            SetActivePlayers(false);
             OnLevelFailed?.Invoke(this, EventArgs.Empty);
         }
 

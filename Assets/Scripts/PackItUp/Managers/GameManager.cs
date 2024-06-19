@@ -15,7 +15,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public event EventHandler OnGameStart;
     public event EventHandler OnGamePause;
     public event EventHandler OnGameResume;
     public event EventHandler OnShopOpen;
