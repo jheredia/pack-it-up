@@ -6,6 +6,7 @@ using PackItUp.Controllers;
 using PackItUp.Managers;
 using PackItUp.MapGenerator;
 using PackItUp.MockSystems;
+using PackItUp.Shop;
 
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,11 +18,13 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnGameStart;
     public event EventHandler OnGamePause;
     public event EventHandler OnGameResume;
+    public event EventHandler OnShopOpen;
 
     const string MAIN_MENU_SCENE = "MainMenu";
 
     [SerializeField] MockTimer _timer;
     [SerializeField] MockInventory _inventory;
+    [SerializeField] Shop _shop;
 
     [SerializeField]
     private bool _debugMode = false;
@@ -34,6 +37,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int _startingLevelIndex;
     private string _currentLevel;
+
+    // Ends level to test shop UI
+    public bool _activateShop;
 
     private void Awake()
     {
@@ -62,6 +68,8 @@ public class GameManager : MonoBehaviour
 
     public MockTimer GetTimer() => _timer;
 
+    public Shop GetShop() => _shop;
+
     public TopDownCharacterController[] GetPlayers() => _players;
 
 
@@ -78,6 +86,7 @@ public class GameManager : MonoBehaviour
 
     public void AdvanceLevelAndStart()
     {
+        //_shop.enabled = false;
         NextLevel();
         StartGame();
     }
@@ -91,10 +100,21 @@ public class GameManager : MonoBehaviour
     public void DrawShop(object sender, EventArgs e)
     {
         // Draw shop
+        OnShopOpen?.Invoke(this, null);
+        //_shop.enabled = true;
     }
 
     public void DrawPauseMenu(object sender, EventArgs e)
     {
         OnGamePause?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Update()
+    {
+        if (_activateShop)
+        {
+            OnShopOpen?.Invoke(this, null);
+            _activateShop = false;
+        }
     }
 }
