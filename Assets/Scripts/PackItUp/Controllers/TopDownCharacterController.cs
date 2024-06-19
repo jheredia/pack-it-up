@@ -26,6 +26,7 @@ namespace PackItUp.Controllers
         private float _timeDashing;
         private bool _isActive = true;
 
+        private Animator _animator;
         [SerializeField] private bool showDebug;
 
         private void Awake()
@@ -38,6 +39,7 @@ namespace PackItUp.Controllers
             _dashAction = playerConfig.GetDashAction(_playerControls);
             _dashAction.performed += _ => Dash();
             dashReadyBar.SetCoolDown(movementConfig.dashCooldown);
+            _animator = gameObject.GetComponent<Animator>();
         }
 
         private void OnEnable()
@@ -139,14 +141,24 @@ namespace PackItUp.Controllers
             _isActive = value;
         }
 
-        public string GetCardinalDirectionOfMovement()
+        public void GetCardinalDirectionOfMovement()
         {
-            if (_moveDirection.magnitude <= 0) return "IDLE";
-            if (_moveDirection.x < 0) return "LEFT";
-            if (_moveDirection.x > 0) return "RIGHT";
-            if (_moveDirection.y < 0) return "DOWN";
-            if (_moveDirection.y > 0) return "UP";
-            return "IDLE";
+            ResetAnimatorTriggers();
+            if (_moveDirection.magnitude <= 0)
+                _animator.SetTrigger("Idle");
+            if (_moveDirection.x < 0) _animator.SetTrigger("RunningLeft");
+            if (_moveDirection.x > 0) _animator.SetTrigger("RunningRight");
+            if (_moveDirection.y < 0) _animator.SetTrigger("RunningDown");
+            if (_moveDirection.y > 0) _animator.SetTrigger("RunningUp");
+        }
+
+        private void ResetAnimatorTriggers()
+        {
+            _animator.ResetTrigger("RunningUp");
+            _animator.ResetTrigger("RunningLeft");
+            _animator.ResetTrigger("RunningRight");
+            _animator.ResetTrigger("RunningDown");
+            _animator.ResetTrigger("Idle");
         }
     }
 }

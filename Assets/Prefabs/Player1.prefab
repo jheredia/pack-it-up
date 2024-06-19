@@ -98,7 +98,7 @@ Transform:
   - {fileID: 8107369121295333451}
   - {fileID: 6888720397156313506}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3275046789339456715
 GameObject:
@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 6888720397156313506}
   - component: {fileID: 6416183410249908474}
   - component: {fileID: 1014793374705128930}
+  - component: {fileID: 3296145738906041834}
   m_Layer: 0
   m_Name: RB
   m_TagString: Untagged
@@ -438,6 +439,27 @@ MonoBehaviour:
   movementConfig: {fileID: 11400000, guid: acf274f61bf6f4ecca484261dffdb550, type: 2}
   dashReadyBar: {fileID: 1867930345666361796}
   showDebug: 0
+--- !u!95 &3296145738906041834
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595493090412176247}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 41454669767de90418fee65b32f6d800, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &3148069956235241096
 PrefabInstance:
   m_ObjectHideFlags: 0

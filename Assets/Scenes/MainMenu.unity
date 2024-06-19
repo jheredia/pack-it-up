@@ -1841,7 +1841,7 @@ MonoBehaviour:
   - FirstLevel
   - SecondLevel
   - ThirdLevel
-  _startingLevelIndex: 0
+  _startingLevelIndex: 1
   _activateShop: 0
 --- !u!4 &1778988393
 Transform:
