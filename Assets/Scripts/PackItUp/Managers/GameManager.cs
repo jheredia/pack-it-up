@@ -16,14 +16,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public event EventHandler OnGamePause;
     public event EventHandler OnGameResume;
-    public event EventHandler OnShopOpen;
 
     const string MAIN_MENU_SCENE = "MainMenu";
     const string CREDITS_SCENE = "Credits";
+    const string SHOP_SCENE = "Shop";
 
     [SerializeField] Timer _timer;
     [SerializeField] MockInventory _inventory;
-    [SerializeField] Shop _shop;
 
     [SerializeField]
     private bool _debugMode = false;
@@ -35,10 +34,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private int _startingLevelIndex;
+    private int _currentLevelIndex;
     private string _currentLevel;
-
-    // Ends level to test shop UI
-    public bool _activateShop;
 
     private AudioSource _audioSource;
 
@@ -68,8 +65,6 @@ public class GameManager : MonoBehaviour
 
     public Timer GetTimer() => _timer;
 
-    public Shop GetShop() => _shop;
-
     public TopDownCharacterController[] GetPlayers() => _players;
 
 
@@ -81,12 +76,12 @@ public class GameManager : MonoBehaviour
 
     void NextLevel()
     {
-        _currentLevel = _levels.First();
+        _currentLevelIndex++;
+        _currentLevel = _levels[_currentLevelIndex];
     }
 
     public void AdvanceLevelAndStart()
     {
-        //_shop.enabled = false;
         NextLevel();
         StartGame();
     }
@@ -109,25 +104,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DrawShop(object sender, EventArgs e)
+    public void LoadShop()
     {
-        // Draw shop
-        OnShopOpen?.Invoke(this, null);
-        //_shop.enabled = true;
+        SceneManager.LoadScene(SHOP_SCENE);
     }
 
     public void DrawPauseMenu(object sender, EventArgs e)
     {
         OnGamePause?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void Update()
-    {
-        if (_activateShop)
-        {
-            OnShopOpen?.Invoke(this, null);
-            _activateShop = false;
-        }
     }
 
     public void StopMainTheme()

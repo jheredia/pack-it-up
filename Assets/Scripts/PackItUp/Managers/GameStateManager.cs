@@ -122,7 +122,6 @@ namespace PackItUp.Managers
 
         private void CompleteObjective()
         {
-            Debug.Log("Objective completed");
             _winCondition = true;
             OnObjectiveCompleted?.Invoke(this, EventArgs.Empty);
             // Another player is still in an end zone
@@ -131,7 +130,6 @@ namespace PackItUp.Managers
 
         private void TryEndGameSuccessfully(object sender, GameObject playerObject)
         {
-            Debug.Log("Try end game");
             //     var objectName = playerObject.transform.parent ? playerObject.transform.parent.name : playerObject.name;
             //     //NOTE... right now this is only called by the end zone, that's why Im casting the sender to EndZone
             //     Debug.Log($"Player {objectName} entered Zone {((EndZone)sender).name}");
@@ -160,7 +158,6 @@ namespace PackItUp.Managers
 
         private void EndGameSuccessState()
         {
-            Debug.Log("End level success");
             _timerUIControl.TogglePause();
             OnLevelSuccess?.Invoke(this, EventArgs.Empty);
         }

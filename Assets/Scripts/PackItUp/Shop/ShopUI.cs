@@ -10,22 +10,20 @@ namespace PackItUp.Shop
 {
     public class ShopUI : MonoBehaviour
     {
+        [SerializeField] private Shop _shop;
         [SerializeField] private ShopUIControl _shopController;
-        private Shop _shop;
         [SerializeField] private List<ShopOption> _shopOptions;
         [SerializeField] private TMP_Text _coinText;
 
         private List<GameObject> _souvenirsForSale;
         private List<PickupData> _itemsForSale;
 
-        public event EventHandler<int> OnClearOptions;
         private int _tempCoinTotal;
         private string _startingCoinText;
 
         private void Awake()
         {
             _startingCoinText = _coinText.text;
-            _shop = GameManager.Instance.GetShop();
         }
 
         private void OnEnable()
@@ -36,24 +34,20 @@ namespace PackItUp.Shop
             _coinText.text = _startingCoinText + _tempCoinTotal.ToString();
             RestockShop();
 
-            _shopController.OnContinue += ClearOptions;
             _shopController.OnPurchase += UpdateTempCoinTotal;
         }
 
         private void OnDisable()
         {
-            _shopController.OnContinue -= ClearOptions;
             _shopController.OnPurchase -= UpdateTempCoinTotal;
         }
 
         public void RestockShop()
         {
             // Get buff/debuff items that were missed in the previous stage
-            Debug.Log("Restocking Shop");
             foreach (ShopOption _option in _shopOptions)
             {
                 // Fill items row with missed items
-                Debug.Log(_itemsForSale.Count);
                 if (_option.GetItemType() && _itemsForSale.Count > 0)
                 {
                     _option.enabled = true;
@@ -61,21 +55,6 @@ namespace PackItUp.Shop
                     _itemsForSale.RemoveAt(0);
                 }
             }
-        }
-
-        public void ClearOptions(object sender, EventArgs e)
-        {
-            // Disable all shop options
-            foreach (ShopOption _option in _shopOptions)
-            {
-                _option.enabled = false;
-            }
-
-            // Send recent coin total after purchases
-            OnClearOptions?.Invoke(this, _tempCoinTotal);
-
-            GameManager.Instance.AdvanceLevelAndStart();
-            gameObject.SetActive(false);
         }
 
         public void UpdateTempCoinTotal(object sender, ShopOption option)

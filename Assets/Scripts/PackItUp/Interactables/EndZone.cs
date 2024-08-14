@@ -52,37 +52,20 @@ namespace PackItUp.Interactables
         private void OnEnable()
         {
             // ActivateVisualCue += OnActivateVisualCue;
-            _gameStateManager.OnObjectiveCompleted += ActivateVisualCue;
             _gameStateManager.OnObjectiveCompleted += ActivateColliders;
         }
 
         private void OnDisable()
         {
             // ActivateVisualCue -= OnActivateVisualCue;
-            _gameStateManager.OnObjectiveCompleted -= ActivateVisualCue;
             _gameStateManager.OnObjectiveCompleted -= ActivateColliders;
         }
 
-        // public static void ActivateCue(bool activate)
-        // {
-        //     ActivateVisualCue?.Invoke(null, activate);
-        // }
-
+        
         private void ActivateColliders(object sender, EventArgs e)
         {
             _bc.enabled = true;
         }
-
-        private void ActivateVisualCue(object sender, EventArgs e)
-        {
-            // _light.enabled = true;
-        }
-
-        //public void OnActivateVisualCue(object sender, bool activate)
-        //{
-        // Enable light to indicate that the player can exit the level
-        //  _light.enabled = activate;
-        //}
 
         private void FixedUpdate()
         {
@@ -92,7 +75,6 @@ namespace PackItUp.Interactables
                 if (results <= 0)
                 {
                     // The end zone is empty, and the exit condition is not met
-                    Debug.Log("End Zone Empty");
                     OnEndZoneEmpty?.Invoke(this, EventArgs.Empty);
                 }
 
@@ -103,10 +85,8 @@ namespace PackItUp.Interactables
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // Get the tag of the collision's GameObject to check that it's a player
-            Debug.Log(collision.gameObject.tag);
             if (collision.gameObject.CompareTag("Player"))
             {
-                Debug.Log("End Zone Enter");
                 OnPlayerEnteredZone?.Invoke(this, collision.gameObject);
             }
         }
@@ -116,7 +96,6 @@ namespace PackItUp.Interactables
             // Get the tag of the collision's GameObject to check that it's a player
             if (collision.gameObject.CompareTag("Player"))
             {
-                Debug.Log("End Zone Exit");
                 OnPlayerExitZone?.Invoke(this, collision.gameObject);
                 // Check FixedUpdate to see if that was the last player in the end zone
                 checkContacts = true;

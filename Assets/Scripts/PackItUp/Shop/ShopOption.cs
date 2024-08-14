@@ -77,7 +77,7 @@ namespace PackItUp.Shop
         {
             _objectImage.sprite = _newObject.bigSprite;
             _objectDescription.text = "";
-            _objectValue = 4;
+            _objectValue = 4;  // default value
             _purchaseButtonText.text = _objectValue.ToString();
         }
     }

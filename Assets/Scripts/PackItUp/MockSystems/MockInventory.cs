@@ -33,14 +33,7 @@ using UnityEngine;
         {
             _debuffItemNamesMissing.Add(item.displayName);
         }
-
-        GameManager.Instance.GetShop().OnShopExit += UpdateCoinTotal;
     }
-
-    /*private List<PickupData> GetPickupData()
-    {
-
-    }*/
 
     public void AcceptPickupData(PickupData pair)
     {
@@ -55,11 +48,6 @@ using UnityEngine;
         {
             _coinTotal += pair.stackNumber;
         }
-    }
-
-    private void OnDisable()
-    {
-        //GameManager.Instance.GetShop().OnShopExit -= UpdateCoinTotal;
     }
 
     public void UpdateCoinTotal(object sender, int value)

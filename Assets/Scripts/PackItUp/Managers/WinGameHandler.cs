@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinGameHandler : MonoBehaviour
 {   
@@ -11,6 +12,7 @@ public class WinGameHandler : MonoBehaviour
     public AudioClip winFX;
     public AudioClip winMusic;
     private bool _isEnding = false;
+    [SerializeField] private string _finalLevel = "ThirdLevel";
 
     private void Awake()
     {
@@ -42,6 +44,13 @@ public class WinGameHandler : MonoBehaviour
 
     private void EndWinProcess()
     {
-        GameManager.Instance.LoadCredits(winMusic);
+        if (_finalLevel == SceneManager.GetActiveScene().name)
+        {
+            GameManager.Instance.LoadCredits(winMusic);
+        }
+        else
+        {
+            GameManager.Instance.LoadShop();
+        }
     }
 }

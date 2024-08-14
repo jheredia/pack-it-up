@@ -8,14 +8,13 @@ namespace PackItUp.Shop
     public class ShopUIControl : MonoBehaviour
     {
         public event EventHandler<ShopOption> OnPurchase;
-        public event EventHandler OnContinue;
+        [SerializeField] private Shop _shop;
 
         public void Purchase(ShopOption optionValues)
         {
             var _cost = optionValues.ObjectValue;
             // must check that current coin amount >= cost
-            Debug.Log(_cost);
-            if (GameManager.Instance.GetShop().ReturnCoinTotal() >= _cost && optionValues.ObjectImage != null)
+            if (_shop.ReturnCoinTotal() >= _cost && optionValues.ObjectImage != null)
             {
                 OnPurchase?.Invoke(this, optionValues);
                 // Set options to default since this item cannot be purchased twice
@@ -32,7 +31,8 @@ namespace PackItUp.Shop
         
         public void Continue()
         {
-            OnContinue?.Invoke(this, null);
+            Debug.Log("Continue Game");
+            GameManager.Instance.AdvanceLevelAndStart();
         }
 
         public void ExitGame()

@@ -15,8 +15,6 @@ namespace PackItUp.Shop
         [SerializeField] private GameObject _shopUI;
         [SerializeField] private ShopUIControl _shopController;
 
-        public event EventHandler<int> OnShopExit;
-
         private int _coinTotal;
 
         private void Awake()
@@ -27,36 +25,23 @@ namespace PackItUp.Shop
 
         private void OnEnable()
         {
-            // disable player controller
-            _gameManager.OnShopOpen += OpenUIShop;
-            //_inventory.OnItemsRequest += RestockShop;
             _shopController.OnPurchase += ReduceCoinTotal;
+            RestockCoins();
         }
 
         private void OnDisable()
         {
-            _gameManager.OnShopOpen -= OpenUIShop;
             _shopController.OnPurchase -= ReduceCoinTotal;
-            // enable player controller
         }
 
         public void RestockCoins()
         {
-            // Get updated coin values and missing items
+            // Get updated coin values
             _coinTotal = _inventory.GetCoins();
         }
 
-        public void OpenUIShop(object sender, EventArgs e)
-        {
-            Debug.Log("Opening Shop");
-            RestockCoins();
-            _shopUI.SetActive(true);
-        }
-        
-
         public List<PickupData> GetMissingItems()
         {
-            Debug.Log(_inventory);
             return _inventory.GetMissingItems();
         }
 

@@ -248,6 +248,52 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1549917968580702916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8454536102416561583}
+  - component: {fileID: 222061988731819975}
+  m_Layer: 0
+  m_Name: MockShop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8454536102416561583
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549917968580702916}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8869208561563983063}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &222061988731819975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549917968580702916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e0f6d79b2380c43b5c600b4acfa04c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shopUI: {fileID: 2098743334300856494}
+  _shopController: {fileID: 4559860222563172760}
 --- !u!1 &1585955004373966558
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,10 +734,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5312963599196019734}
+  - {fileID: 8454536102416561583}
   - {fileID: 5560482786908957494}
   - {fileID: 562463376498320149}
   - {fileID: 6869065354120682093}
+  - {fileID: 5312963599196019734}
   - {fileID: 1189040798973886553}
   - {fileID: 366913067730558959}
   m_Father: {fileID: 0}
@@ -777,6 +824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c195b3e94022dae4f9d3eb9cc02643d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shop: {fileID: 222061988731819975}
   _shopController: {fileID: 4559860222563172760}
   _shopOptions:
   - {fileID: 1969267776504585413}
@@ -795,6 +843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff28f73ec59bba4b9ddb2571a589b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shop: {fileID: 222061988731819975}
 --- !u!1 &2209835812726846102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,10 +1214,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.41093904, g: 0.8962264, b: 0.07327632, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_SelectedColor: {r: 0.8207547, g: 0, b: 0, a: 1}
+    m_DisabledColor: {r: 0.1981132, g: 0.08348165, b: 0.08348165, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2421,7 +2470,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Want any items you missed?
+  m_text: 'Want any more items?
 
     Total Coins: '
   m_isRightToLeft: 0
